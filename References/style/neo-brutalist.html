@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How Video Compression Works</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;600;700&family=Inter:wght@400;600&display=swap');
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #fcfbf7; /* Warm off-white */
+            color: #1a1a1a;
+        }
+
+        h1, h2, h3, h4, .font-display {
+            font-family: 'Space Grotesk', sans-serif;
+        }
+
+        /* Neo-Brutalist Utilities */
+        .neo-box {
+            background-color: white;
+            border: 3px solid black;
+            box-shadow: 6px 6px 0px 0px rgba(0,0,0,1);
+            transition: all 0.2s ease;
+        }
+        .neo-box:hover {
+            transform: translate(-2px, -2px);
+            box-shadow: 8px 8px 0px 0px rgba(0,0,0,1);
+        }
+        
+        .neo-btn {
+            border: 3px solid black;
+            box-shadow: 4px 4px 0px 0px rgba(0,0,0,1);
+            font-weight: bold;
+            transition: all 0.1s;
+        }
+        .neo-btn:active {
+            transform: translate(2px, 2px);
+            box-shadow: 2px 2px 0px 0px rgba(0,0,0,1);
+        }
+
+        .neo-badge {
+            border: 2px solid black;
+            box-shadow: 3px 3px 0px 0px rgba(0,0,0,1);
+        }
+
+        /* Dot Pattern Background */
+        .bg-dots {
+            background-image: radial-gradient(#000 1px, transparent 1px);
+            background-size: 24px 24px;
+        }
+
+        .fade-in-section {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+            will-change: opacity, visibility;
+        }
+        .fade-in-section.is-visible {
+            opacity: 1;
+            transform: none;
+        }
+    </style>
+</head>
+<body class="selection:bg-yellow-400 selection:text-black overflow-x-hidden">
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 bg-[#fcfbf7]/95 border-b-4 border-black">
+        <div class="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <div class="bg-black text-white p-1">
+                    <i data-lucide="film" class="w-6 h-6"></i>
+                </div>
+                <span class="font-display font-bold text-xl uppercase tracking-tighter">Compression<span class="text-blue-600">101</span></span>
+            </div>
+            <div class="hidden md:flex space-x-8 text-sm font-bold text-gray-600">
+                <a href="#why" class="hover:text-black hover:underline decoration-4 decoration-yellow-400 underline-offset-4 transition-all">The Problem</a>
+                <a href="#spatial" class="hover:text-black hover:underline decoration-4 decoration-blue-400 underline-offset-4 transition-all">Spatial</a>
+                <a href="#temporal" class="hover:text-black hover:underline decoration-4 decoration-purple-400 underline-offset-4 transition-all">Temporal</a>
+                <a href="#codecs" class="hover:text-black hover:underline decoration-4 decoration-red-400 underline-offset-4 transition-all">Codecs</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="min-h-screen flex items-center justify-center relative overflow-hidden bg-[#ff9f1c]">
+        <!-- Geometric Shapes Decoration -->
+        <div class="absolute top-20 right-[-50px] w-64 h-64 bg-[#2ec4b6] rounded-full border-4 border-black opacity-50"></div>
+        <div class="absolute bottom-20 left-[-50px] w-48 h-48 bg-[#ffbf69] rotate-45 border-4 border-black"></div>
+        <div class="absolute inset-0 bg-dots opacity-10 pointer-events-none"></div>
+
+        <div class="max-w-4xl mx-auto px-4 text-center relative z-10 mt-16">
+            <div class="inline-flex items-center space-x-2 bg-white border-2 border-black px-4 py-2 mb-8 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
+                <span class="w-3 h-3 bg-red-500 rounded-full border border-black animate-pulse"></span>
+                <span class="text-xs font-bold uppercase tracking-wider">Interactive Guide</span>
+            </div>
+            <h1 class="text-6xl md:text-8xl font-display font-extrabold mb-6 leading-[0.9] text-white" style="text-shadow: 6px 6px 0px #000;">
+                SHRINK THE <br>
+                PIXELS
+            </h1>
+            <p class="text-xl md:text-2xl font-bold text-black max-w-2xl mx-auto mb-10 leading-relaxed bg-white/50 backdrop-blur-sm p-4 border-2 border-black inline-block transform -rotate-1">
+                How clever math tricks Netflix into sending you <br> 1000x less data than it should.
+            </p>
+            <br>
+            <a href="#why" class="neo-btn inline-flex items-center justify-center px-10 py-4 text-lg text-black bg-white hover:bg-yellow-300">
+                Start Learning
+                <i data-lucide="arrow-down" class="ml-2 w-5 h-5"></i>
+            </a>
+        </div>
+    </header>
+
+    <!-- Section 1: The Problem -->
+    <section id="why" class="py-24 bg-white border-b-4 border-black fade-in-section">
+        <div class="max-w-5xl mx-auto px-6">
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div>
+                    <h2 class="text-5xl font-display font-black mb-6">RAW VIDEO IS <span class="bg-red-500 text-white px-2">HUGE</span></h2>
+                    <p class="text-lg text-gray-800 mb-6 font-medium">
+                        A standard 4K movie has 8 million pixels per frame, 3 colors per pixel, and runs at 60 frames per second. It's too much.
+                    </p>
+                    <div class="neo-box p-8 space-y-4 bg-yellow-50 transform rotate-1">
+                        <div class="flex justify-between border-b-2 border-black border-dashed pb-2">
+                            <span class="font-bold">Resolution</span>
+                            <span class="font-mono bg-black text-white px-1">3840 x 2160</span>
+                        </div>
+                        <div class="flex justify-between border-b-2 border-black border-dashed pb-2">
+                            <span class="font-bold">Color Depth</span>
+                            <span class="font-mono">24 bits</span>
+                        </div>
+                        <div class="flex justify-between border-b-2 border-black border-dashed pb-2">
+                            <span class="font-bold">Frame Rate</span>
+                            <span class="font-mono">60 fps</span>
+                        </div>
+                        <div class="flex justify-between text-red-600 font-black text-xl pt-2">
+                            <span>Data Rate</span>
+                            <span>~1.5 GB / sec</span>
+                        </div>
+                    </div>
+                    <p class="mt-8 text-xl font-bold">
+                        That's <span class="bg-black text-white px-1">10 Terabytes</span> for a movie. <br>
+                        We need to fix that.
+                    </p>
+                </div>
+                <div class="relative h-64 md:h-96 bg-gray-100 border-4 border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] flex items-center justify-center overflow-hidden">
+                    <div class="absolute inset-0 bg-[radial-gradient(#000_2px,transparent_2px)] [background-size:16px_16px] opacity-20"></div>
+                    <div class="text-center z-10 bg-white p-4 border-2 border-black transform -rotate-3">
+                        <i data-lucide="server-crash" class="w-16 h-16 text-red-500 mx-auto mb-2"></i>
+                        <span class="text-red-600 font-black font-display text-2xl">CRITICAL OVERLOAD</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 2: Spatial Compression -->
+    <section id="spatial" class="py-24 bg-[#cbf3f0] border-b-4 border-black fade-in-section relative">
+        <div class="max-w-5xl mx-auto px-6">
+            <div class="mb-12">
+                <div class="inline-block bg-black text-white px-3 py-1 font-bold text-sm mb-4 neo-badge">STEP 1</div>
+                <h2 class="text-5xl font-display font-black mb-4">SPATIAL COMPRESSION</h2>
+                <p class="text-xl font-bold">Folding the laundry (Intra-frame compression).</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-12">
+                <div class="space-y-6 text-lg">
+                    <p>
+                        This is basically how JPEGs work. If you have a picture of a blue sky, you don't need to write "blue, blue, blue" 1,000 times.
+                    </p>
+                    <p>
+                        Instead, the computer says: <span class="bg-blue-500 text-white px-1 font-bold">"x500 Blue Pixels"</span>. It groups similar colors into <strong>Macroblocks</strong> and discards fine detail your eye won't notice.
+                    </p>
+                    
+                    <div class="bg-white border-2 border-black p-4 mt-4 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
+                        <h4 class="font-bold border-b-2 border-black mb-2">Key Techniques</h4>
+                        <ul class="space-y-2">
+                            <li class="flex items-center">
+                                <i data-lucide="check-square" class="w-5 h-5 text-green-600 mr-2 filled"></i>
+                                <span><strong>Discrete Cosine Transform:</strong> Math for "smoothing"</span>
+                            </li>
+                            <li class="flex items-center">
+                                <i data-lucide="check-square" class="w-5 h-5 text-green-600 mr-2"></i>
+                                <span><strong>Chroma Subsampling:</strong> Removing color info</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- Spatial Interactive Demo -->
+                <div class="neo-box p-6 bg-white">
+                    <div class="flex justify-between items-center mb-4">
+                        <h3 class="font-bold uppercase">Interactive: Group Pixels</h3>
+                        <i data-lucide="mouse-pointer-2" class="w-5 h-5"></i>
+                    </div>
+                    <div class="relative w-full aspect-square bg-gray-100 border-2 border-black cursor-crosshair group" id="spatial-demo">
+                        <!-- JS Generated Grid -->
+                        <div class="absolute inset-0 flex items-center justify-center pointer-events-none z-10">
+                            <span class="bg-black text-white px-4 py-2 font-bold border-2 border-white shadow-lg opacity-0 group-hover:opacity-100 transition-opacity">HOVER TO COMPRESS</span>
+                        </div>
+                    </div>
+                    <div class="mt-4 flex justify-between font-mono font-bold text-sm border-t-2 border-black pt-3">
+                        <span>Original: 256 Blocks</span>
+                        <span id="compressed-stat" class="text-blue-600 bg-blue-100 px-2">Diff: --</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 3: Temporal Compression -->
+    <section id="temporal" class="py-24 bg-[#fcfbf7] border-b-4 border-black fade-in-section">
+        <div class="max-w-5xl mx-auto px-6">
+            <div class="mb-12 text-center max-w-3xl mx-auto">
+                <div class="inline-block bg-purple-500 text-white px-3 py-1 font-bold text-sm mb-4 neo-badge -rotate-2">STEP 2: THE MAGIC</div>
+                <h2 class="text-5xl font-display font-black mb-4">TEMPORAL COMPRESSION</h2>
+                <p class="text-xl text-gray-700">Don't repeat yourself. If the background doesn't move, don't save it again.</p>
+            </div>
+
+            <div class="grid lg:grid-cols-3 gap-6 mb-12">
+                <div class="neo-box p-6 bg-[#ffadad]">
+                    <div class="w-12 h-12 bg-white border-2 border-black flex items-center justify-center mb-4 font-black text-xl shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">I</div>
+                    <h3 class="text-xl font-bold mb-2">I-Frames</h3>
+                    <p class="text-sm font-medium">The whole picture. Expensive data-wise. Only happens on scene cuts.</p>
+                </div>
+                <div class="neo-box p-6 bg-[#ffd6a5]">
+                    <div class="w-12 h-12 bg-white border-2 border-black flex items-center justify-center mb-4 font-black text-xl shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">P</div>
+                    <h3 class="text-xl font-bold mb-2">P-Frames</h3>
+                    <p class="text-sm font-medium">Predicted frames. Only saves what <em>changed</em> from the last frame.</p>
+                </div>
+                <div class="neo-box p-6 bg-[#fdffb6]">
+                    <div class="w-12 h-12 bg-white border-2 border-black flex items-center justify-center mb-4 font-black text-xl shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">B</div>
+                    <h3 class="text-xl font-bold mb-2">B-Frames</h3>
+                    <p class="text-sm font-medium">Bi-directional. Looks forward and backward to guess the middle image.</p>
+                </div>
+            </div>
+
+            <!-- Temporal Visualization Canvas -->
+            <div class="border-4 border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] bg-white">
+                <div class="bg-gray-100 p-4 border-b-4 border-black flex flex-wrap gap-4 justify-between items-center">
+                    <span class="font-bold uppercase tracking-wider text-sm flex items-center gap-2">
+                        <span class="w-3 h-3 bg-red-500 rounded-full animate-pulse"></span>
+                        Motion Visualizer
+                    </span>
+                    <div class="flex space-x-3">
+                        <button onclick="setMode('original')" class="neo-btn px-4 py-2 text-xs bg-white hover:bg-gray-100" id="btn-orig">ORIGINAL</button>
+                        <button onclick="setMode('diff')" class="neo-btn px-4 py-2 text-xs bg-black text-white hover:bg-gray-800" id="btn-diff">DIFFERENCE</button>
+                    </div>
+                </div>
+                <div class="relative h-[400px] w-full bg-white flex items-center justify-center" id="canvas-container">
+                    <canvas id="motionCanvas" class="max-w-full h-full"></canvas>
+                    
+                    <div class="absolute bottom-4 left-4 bg-white border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] px-4 py-2">
+                        <span class="text-xs font-bold text-gray-500 uppercase">Data Savings</span>
+                        <div id="savings-display" class="font-mono font-bold text-xl">0%</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 4: Codecs -->
+    <section id="codecs" class="py-24 bg-[#a0c4ff] border-b-4 border-black fade-in-section">
+        <div class="max-w-4xl mx-auto px-6">
+            <h2 class="text-5xl font-display font-black mb-8 text-white" style="text-shadow: 3px 3px 0px #000;">THE TRANSLATORS</h2>
+            <p class="text-black font-bold mb-8 text-xl">
+                Codecs (Coder-Decoder) are the instruction manuals for these tricks.
+            </p>
+
+            <div class="space-y-6">
+                <div class="neo-box p-6 bg-white hover:bg-gray-50 cursor-default">
+                    <div class="flex justify-between items-center mb-2">
+                        <h3 class="text-2xl font-black">H.264 (AVC)</h3>
+                        <span class="px-2 py-1 bg-gray-200 border border-black text-xs font-bold uppercase">The Classic</span>
+                    </div>
+                    <p class="font-medium">The Honda Civic of compression. Reliable, plays on everything from an old iPhone to a toaster. Not efficient enough for 4K.</p>
+                </div>
+
+                <div class="neo-box p-6 bg-white hover:bg-gray-50 cursor-default">
+                    <div class="flex justify-between items-center mb-2">
+                        <h3 class="text-2xl font-black">H.265 (HEVC)</h3>
+                        <span class="px-2 py-1 bg-blue-200 border border-black text-xs font-bold uppercase">High Efficiency</span>
+                    </div>
+                    <p class="font-medium">Twice as smart as H.264. Crucial for 4K/HDR. Licensing it is a nightmare, but it works great.</p>
+                </div>
+
+                <div class="neo-box p-6 bg-white hover:bg-gray-50 cursor-default">
+                    <div class="flex justify-between items-center mb-2">
+                        <h3 class="text-2xl font-black">AV1</h3>
+                        <span class="px-2 py-1 bg-purple-200 border border-black text-xs font-bold uppercase">The Future</span>
+                    </div>
+                    <p class="font-medium">Free, open-source, and incredibly tiny files. Used by YouTube and Netflix. Kills your battery if your phone is old.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-black py-12 text-white">
+        <div class="max-w-6xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center">
+            <div class="mb-4 md:mb-0">
+                <span class="font-display font-bold text-2xl uppercase tracking-tighter">Compression<span class="text-blue-500">101</span></span>
+                <p class="text-sm text-gray-400 mt-2 font-mono">Pixel Reduction Services, Est. 2025</p>
+            </div>
+            <div class="flex space-x-6">
+                <a href="#" class="hover:text-blue-400 transition-colors"><i data-lucide="github" class="w-6 h-6"></i></a>
+                <a href="#" class="hover:text-blue-400 transition-colors"><i data-lucide="twitter" class="w-6 h-6"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script>
+        // Initialize Lucide Icons
+        lucide.createIcons();
+
+        // -----------------------
+        // Intersection Observer for Fade In
+        // -----------------------
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: "0px 0px -50px 0px"
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in-section').forEach(section => {
+            observer.observe(section);
+        });
+
+        // -----------------------
+        // Spatial Demo Logic
+        // -----------------------
+        const spatialContainer = document.getElementById('spatial-demo');
+        const compressedStat = document.getElementById('compressed-stat');
+        
+        // Create 16x16 grid
+        const gridSize = 16;
+        const totalBlocks = gridSize * gridSize;
+        
+        for(let i = 0; i < totalBlocks; i++) {
+            const div = document.createElement('div');
+            // Create a gradient pattern (Blue/Teal for light theme)
+            const x = (i % gridSize) / gridSize;
+            const y = Math.floor(i / gridSize) / gridSize;
+            const intensity = 150 + (x * 80) + (y * 20);
+            
+            div.style.backgroundColor = `rgb(100, ${intensity}, 240)`;
+            div.style.width = '6.25%';
+            div.style.height = '6.25%';
+            div.style.float = 'left';
+            div.className = 'transition-all duration-300 border border-transparent hover:border-black/10';
+            
+            // Interaction
+            div.addEventListener('mouseenter', () => {
+                highlightNeighbors(i);
+            });
+            
+            spatialContainer.appendChild(div);
+        }
+
+        function highlightNeighbors(index) {
+            // Reset
+            Array.from(spatialContainer.children).forEach(c => {
+                c.style.transform = 'scale(1)';
+                c.style.zIndex = '0';
+                c.style.boxShadow = 'none';
+                c.style.border = '1px solid transparent';
+            });
+
+            // Simulate a 2x2 macroblock
+            const indices = [index, index+1, index+gridSize, index+gridSize+1];
+            
+            indices.forEach(idx => {
+                if(spatialContainer.children[idx]) {
+                    const el = spatialContainer.children[idx];
+                    el.style.transform = 'scale(1.1)';
+                    el.style.zIndex = '10';
+                    el.style.border = '2px solid black';
+                    el.style.boxShadow = '4px 4px 0px rgba(0,0,0,1)';
+                }
+            });
+            
+            compressedStat.innerText = "SAVED 75% SPACE";
+            compressedStat.classList.add('bg-yellow-300');
+        }
+        
+        spatialContainer.addEventListener('mouseleave', () => {
+             compressedStat.innerText = "Diff: --";
+             compressedStat.classList.remove('bg-yellow-300');
+             Array.from(spatialContainer.children).forEach(c => {
+                c.style.transform = 'scale(1)';
+                c.style.zIndex = '0';
+                c.style.boxShadow = 'none';
+                c.style.border = '1px solid transparent';
+            });
+        });
+
+
+        // -----------------------
+        // Temporal Canvas Animation (Light Theme Colors)
+        // -----------------------
+        const canvas = document.getElementById('motionCanvas');
+        const ctx = canvas.getContext('2d');
+        const savingsDisplay = document.getElementById('savings-display');
+        let mode = 'original'; // 'original' or 'diff'
+        
+        // Resize canvas
+        function resizeCanvas() {
+            const parent = canvas.parentElement;
+            canvas.width = parent.clientWidth;
+            canvas.height = parent.clientHeight;
+        }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        // Animation State
+        let ballX = 50;
+        let ballY = 200;
+        let ballSpeed = 4;
+        let time = 0;
+
+        function setMode(newMode) {
+            mode = newMode;
+            // UI Update
+            const btnOrig = document.getElementById('btn-orig');
+            const btnDiff = document.getElementById('btn-diff');
+            
+            if (newMode === 'original') {
+                btnOrig.className = "neo-btn px-4 py-2 text-xs bg-black text-white";
+                btnDiff.className = "neo-btn px-4 py-2 text-xs bg-white text-black hover:bg-gray-100";
+            } else {
+                btnOrig.className = "neo-btn px-4 py-2 text-xs bg-white text-black hover:bg-gray-100";
+                btnDiff.className = "neo-btn px-4 py-2 text-xs bg-blue-600 text-white border-black";
+            }
+        }
+        // Initialize buttons
+        setMode('original');
+
+        function drawMountains() {
+            ctx.fillStyle = '#ff9f1c'; // Bright Orange for mountains
+            ctx.strokeStyle = '#000000';
+            ctx.lineWidth = 3;
+            
+            ctx.beginPath();
+            ctx.moveTo(0, canvas.height);
+            ctx.lineTo(100, canvas.height - 150);
+            ctx.lineTo(200, canvas.height - 50);
+            ctx.lineTo(350, canvas.height - 200);
+            ctx.lineTo(500, canvas.height - 80);
+            ctx.lineTo(canvas.width, canvas.height - 180);
+            ctx.lineTo(canvas.width, canvas.height);
+            ctx.fill();
+            ctx.stroke();
+        }
+
+        function drawBall(x, y) {
+            ctx.fillStyle = '#ef476f'; // Pink/Red
+            ctx.strokeStyle = '#000000';
+            ctx.lineWidth = 3;
+            
+            ctx.beginPath();
+            ctx.arc(x, y, 30, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.stroke();
+            
+            // Shine
+            ctx.fillStyle = '#ffffff';
+            ctx.beginPath();
+            ctx.arc(x - 10, y - 10, 8, 0, Math.PI * 2);
+            ctx.fill();
+        }
+
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            // Update Ball Position
+            ballX += ballSpeed;
+            if (ballX > canvas.width - 30 || ballX < 30) ballSpeed *= -1;
+            ballY = 200 + Math.sin(time * 0.05) * 50;
+            time++;
+
+            if (mode === 'original') {
+                // Draw Background (Sky)
+                ctx.fillStyle = '#bde0fe'; // Light Blue
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+                
+                // Draw Clouds
+                ctx.fillStyle = '#ffffff';
+                ctx.fillRect(100, 50, 100, 30);
+                ctx.strokeRect(100, 50, 100, 30);
+                ctx.fillRect(300, 80, 120, 30);
+                ctx.strokeRect(300, 80, 120, 30);
+
+                drawMountains();
+                drawBall(ballX, ballY);
+                
+                savingsDisplay.innerText = "0% (Full Image)";
+                savingsDisplay.className = "font-mono font-bold text-xl text-red-500";
+            } else {
+                // DIFF MODE
+                // Fill White/Grid for 'Null'
+                ctx.fillStyle = '#ffffff';
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+                
+                // Draw grid pattern to signify "Empty"
+                ctx.strokeStyle = '#e5e7eb';
+                ctx.lineWidth = 1;
+                for(let i=0; i<canvas.width; i+=40) {
+                    ctx.beginPath(); ctx.moveTo(i,0); ctx.lineTo(i,canvas.height); ctx.stroke();
+                }
+                for(let i=0; i<canvas.height; i+=40) {
+                    ctx.beginPath(); ctx.moveTo(0,i); ctx.lineTo(canvas.width,i); ctx.stroke();
+                }
+
+
+                // Current Delta
+                drawBall(ballX, ballY);
+                
+                // Add "Motion Vector" lines
+                ctx.strokeStyle = '#000000'; // Black vector
+                ctx.lineWidth = 2;
+                ctx.setLineDash([5, 5]); // Dashed line
+                ctx.beginPath();
+                ctx.moveTo(ballX - ballSpeed * 5, ballY);
+                ctx.lineTo(ballX, ballY);
+                ctx.stroke();
+                ctx.setLineDash([]); // Reset
+
+                // Text overlay
+                ctx.fillStyle = '#000';
+                ctx.font = "bold 20px Space Grotesk";
+                ctx.fillText("NO DATA (STATIC)", 50, canvas.height - 50);
+
+                savingsDisplay.innerText = "~90% (Moving Only)";
+                savingsDisplay.className = "font-mono font-bold text-xl text-green-600";
+            }
+
+            requestAnimationFrame(animate);
+        }
+
+        animate();
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video Compression — International Style</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700&display=swap');
+        
+        :root {
+            --swiss-red: #FF3300;
+            --grid-color: #e5e5e5;
+        }
+
+        body {
+            font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif;
+            background-color: #ffffff;
+            color: #000000;
+            line-height: 1.4;
+        }
+
+        /* Swiss Typography Utilities */
+        .type-huge {
+            font-size: clamp(3rem, 8vw, 8rem);
+            font-weight: 700;
+            letter-spacing: -0.04em;
+            line-height: 0.9;
+        }
+        
+        .type-display {
+            font-size: clamp(2rem, 4vw, 4rem);
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            line-height: 1;
+        }
+
+        .type-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            font-weight: 600;
+        }
+
+        /* Layout Grid */
+        .swiss-container {
+            border-left: 1px solid var(--grid-color);
+            border-right: 1px solid var(--grid-color);
+        }
+        
+        .swiss-border-b {
+            border-bottom: 1px solid var(--grid-color);
+        }
+        
+        .swiss-border-t {
+            border-top: 1px solid var(--grid-color);
+        }
+        
+        .swiss-border-r {
+            border-right: 1px solid var(--grid-color);
+        }
+
+        /* Components */
+        .btn-swiss {
+            background: transparent;
+            border: 1px solid black;
+            color: black;
+            padding: 1rem 2rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            letter-spacing: 0.05em;
+            transition: all 0.2s;
+            border-radius: 0;
+        }
+        
+        .btn-swiss:hover {
+            background: black;
+            color: white;
+        }
+        
+        .btn-swiss-accent {
+            background: var(--swiss-red);
+            border: 1px solid var(--swiss-red);
+            color: white;
+        }
+        .btn-swiss-accent:hover {
+            background: white;
+            color: var(--swiss-red);
+        }
+
+        /* Animations */
+        .fade-up {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .fade-up.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* Grid Background Pattern */
+        .bg-grid-lines {
+            background-size: 40px 40px;
+            background-image:
+                linear-gradient(to right, #f0f0f0 1px, transparent 1px),
+                linear-gradient(to bottom, #f0f0f0 1px, transparent 1px);
+        }
+    </style>
+</head>
+<body class="selection:bg-black selection:text-white overflow-x-hidden">
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 bg-white/90 backdrop-blur-sm border-b border-gray-200">
+        <div class="max-w-7xl mx-auto flex justify-between items-stretch h-16 swiss-container">
+            <div class="flex items-center px-6 border-r border-gray-200">
+                <span class="font-bold tracking-tight text-lg">COMPRESSION 101</span>
+            </div>
+            <div class="hidden md:flex flex-1 justify-end items-center">
+                <a href="#why" class="h-full flex items-center px-8 text-sm font-medium hover:bg-black hover:text-white transition-colors border-l border-gray-200">PROBLEM</a>
+                <a href="#spatial" class="h-full flex items-center px-8 text-sm font-medium hover:bg-black hover:text-white transition-colors border-l border-gray-200">SPATIAL</a>
+                <a href="#temporal" class="h-full flex items-center px-8 text-sm font-medium hover:bg-black hover:text-white transition-colors border-l border-gray-200">TEMPORAL</a>
+                <a href="#codecs" class="h-full flex items-center px-8 text-sm font-medium hover:bg-black hover:text-white transition-colors border-l border-gray-200">CODECS</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="min-h-screen pt-16 flex flex-col relative bg-white">
+        <!-- Grid Background -->
+        <div class="absolute inset-0 bg-grid-lines -z-10"></div>
+        
+        <div class="max-w-7xl mx-auto w-full flex-1 flex flex-col justify-center px-6 md:px-12 swiss-container">
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-8 mb-12">
+                <div class="md:col-span-8">
+                    <span class="type-label text-[var(--swiss-red)] mb-4 block">• Technical Guide 01</span>
+                    <h1 class="type-huge">
+                        LESS DATA.<br>
+                        MORE VIDEO.
+                    </h1>
+                </div>
+                <div class="md:col-span-4 flex flex-col justify-end pb-4">
+                    <p class="text-xl leading-relaxed mb-8 font-light">
+                        Raw video is unwieldy. We use mathematical reduction to transmit 4K cinema over fragile wireless networks.
+                    </p>
+                    <div>
+                        <a href="#why" class="btn-swiss inline-flex items-center">
+                            Begin Analysis <i data-lucide="arrow-down" class="ml-2 w-4 h-4"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Bottom Bar -->
+        <div class="border-t border-gray-200 bg-white">
+            <div class="max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-4 swiss-container">
+                <div class="p-6 border-r border-gray-200">
+                    <span class="type-label block text-gray-400 mb-1">Figure A</span>
+                    <span class="font-bold">Raw Video</span>
+                </div>
+                <div class="p-6 border-r border-gray-200">
+                    <span class="type-label block text-gray-400 mb-1">Figure B</span>
+                    <span class="font-bold">Spatial Folding</span>
+                </div>
+                <div class="p-6 border-r border-gray-200">
+                    <span class="type-label block text-gray-400 mb-1">Figure C</span>
+                    <span class="font-bold">Temporal Delta</span>
+                </div>
+                <div class="p-6 bg-[var(--swiss-red)] text-white">
+                    <span class="type-label block opacity-70 mb-1">Status</span>
+                    <span class="font-bold">Interactive</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Section 1: The Problem -->
+    <section id="why" class="py-32 bg-white swiss-border-b">
+        <div class="max-w-7xl mx-auto px-6 md:px-12 swiss-container fade-up">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-0 border border-gray-200">
+                <!-- Text Block -->
+                <div class="p-12 md:border-r border-gray-200 flex flex-col justify-center">
+                    <span class="type-label mb-6 block">01 — The Constraint</span>
+                    <h2 class="type-display mb-8">Data Overload.</h2>
+                    <p class="text-lg text-gray-600 mb-8 max-w-md">
+                        A raw 4K video stream demands roughly 1.5 Gigabytes per second. This exceeds standard consumer bandwidth by orders of magnitude.
+                    </p>
+                    
+                    <div class="space-y-0 border-t border-gray-200">
+                        <div class="flex justify-between py-4 border-b border-gray-200">
+                            <span class="font-medium">Pixel Count</span>
+                            <span class="font-mono">8,294,400</span>
+                        </div>
+                        <div class="flex justify-between py-4 border-b border-gray-200">
+                            <span class="font-medium">Bit Depth</span>
+                            <span class="font-mono">24-bit RGB</span>
+                        </div>
+                        <div class="flex justify-between py-4 border-b border-gray-200 text-[var(--swiss-red)]">
+                            <span class="font-bold">Uncompressed Size (2h)</span>
+                            <span class="font-mono font-bold">~10 TB</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Graphic Block -->
+                <div class="bg-gray-50 p-12 flex items-center justify-center relative overflow-hidden">
+                    <div class="absolute inset-0 bg-grid-lines opacity-50"></div>
+                    <!-- Minimalist Storage Representation -->
+                    <div class="w-full max-w-xs space-y-1">
+                        <div class="h-32 bg-black w-full relative">
+                            <span class="absolute top-2 left-2 text-white type-label">Data</span>
+                        </div>
+                         <div class="h-32 bg-black w-full animate-pulse opacity-80"></div>
+                         <div class="h-32 bg-[var(--swiss-red)] w-full flex items-center justify-center">
+                            <span class="text-white font-bold tracking-widest">OVERFLOW</span>
+                         </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 2: Spatial Compression -->
+    <section id="spatial" class="bg-white swiss-border-b">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 swiss-container">
+            <!-- Left: Explanation -->
+            <div class="p-12 md:p-24 border-r border-gray-200 fade-up">
+                <span class="type-label mb-6 block">02 — Intra-frame</span>
+                <h2 class="type-display mb-8">Redundancy.</h2>
+                <p class="text-lg text-gray-600 mb-8">
+                    Spatial compression (JPEG) analyzes a single frame. It identifies blocks of identical or similar pixels and represents them as a mathematical formula rather than individual data points.
+                </p>
+                <div class="bg-gray-100 p-6 text-sm">
+                    <strong>Technique:</strong> Discrete Cosine Transform (DCT)<br>
+                    <strong>Goal:</strong> Eliminate high-frequency noise invisible to the human eye.
+                </div>
+            </div>
+
+            <!-- Right: Interactive -->
+            <div class="p-12 md:p-24 bg-gray-50 flex flex-col justify-center fade-up">
+                <div class="mb-6 flex justify-between items-end">
+                    <h3 class="text-xl font-bold">Visualizer</h3>
+                    <span id="compressed-stat" class="type-label text-[var(--swiss-red)]">Hover Grid to Analyze</span>
+                </div>
+                
+                <div class="aspect-square w-full border border-black bg-white" id="spatial-demo">
+                    <!-- Grid Generated by JS -->
+                </div>
+                <div class="mt-4 flex justify-between text-xs text-gray-400 font-mono">
+                    <span>GRID: 16x16</span>
+                    <span>SOURCE: RANDOM_NOISE</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 3: Temporal Compression -->
+    <section id="temporal" class="bg-black text-white">
+        <div class="max-w-7xl mx-auto px-6 md:px-12 py-32 swiss-container fade-up">
+            <div class="border-l-4 border-[var(--swiss-red)] pl-8 mb-16">
+                <span class="type-label mb-4 block text-gray-400">03 — Inter-frame</span>
+                <h2 class="type-display text-white mb-6">Delta Encoding.</h2>
+                <p class="text-xl text-gray-300 max-w-2xl">
+                    The most significant savings come from time. If a pixel does not change from Frame A to Frame B, it is discarded. We only transmit the difference (the delta).
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-px bg-gray-800 border border-gray-800 mb-16">
+                <div class="bg-black p-8">
+                    <span class="text-4xl font-bold block mb-2">I</span>
+                    <span class="type-label text-gray-500">Intra-coded</span>
+                    <p class="mt-4 text-sm text-gray-400">Complete image reference. High data cost.</p>
+                </div>
+                <div class="bg-black p-8">
+                    <span class="text-4xl font-bold block mb-2">P</span>
+                    <span class="type-label text-gray-500">Predicted</span>
+                    <p class="mt-4 text-sm text-gray-400">Forward reference only. Motion vectors.</p>
+                </div>
+                <div class="bg-black p-8">
+                    <span class="text-4xl font-bold block mb-2">B</span>
+                    <span class="type-label text-gray-500">Bi-directional</span>
+                    <p class="mt-4 text-sm text-gray-400">Interpolated from past and future.</p>
+                </div>
+            </div>
+
+            <!-- Canvas Container -->
+            <div class="bg-white text-black p-1">
+                <div class="flex justify-between items-center p-4 bg-gray-100 border-b border-gray-300">
+                    <span class="type-label">Motion Analysis System</span>
+                    <div class="flex gap-2">
+                        <button onclick="setMode('original')" id="btn-orig" class="px-4 py-2 text-xs font-bold uppercase bg-black text-white">Original</button>
+                        <button onclick="setMode('diff')" id="btn-diff" class="px-4 py-2 text-xs font-bold uppercase border border-black hover:bg-black hover:text-white transition-colors">Difference</button>
+                    </div>
+                </div>
+                <div class="h-[450px] w-full relative bg-white">
+                    <canvas id="motionCanvas" class="w-full h-full block"></canvas>
+                    <div class="absolute top-4 left-4 font-mono text-xs">
+                        DATA_STREAM:<br>
+                        <span id="savings-display" class="font-bold text-lg">WAITING...</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 4: Codecs -->
+    <section id="codecs" class="py-32 bg-white swiss-border-b">
+        <div class="max-w-7xl mx-auto px-6 md:px-12 swiss-container fade-up">
+            <span class="type-label mb-6 block">04 — Standards</span>
+            <h2 class="type-display mb-16">The Codecs.</h2>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
+                <!-- H.264 -->
+                <div class="border-t border-black pt-6">
+                    <div class="flex items-baseline justify-between mb-4">
+                        <h3 class="text-2xl font-bold">H.264</h3>
+                        <span class="text-xs font-mono text-gray-500">AVC</span>
+                    </div>
+                    <p class="text-gray-600 mb-6 text-sm">
+                        The ubiquitous standard. High compatibility, moderate efficiency. The foundation of modern web video.
+                    </p>
+                    <div class="w-full bg-gray-200 h-1">
+                        <div class="bg-black h-1 w-1/2"></div>
+                    </div>
+                    <span class="type-label mt-2 block text-xs">Efficiency: 50%</span>
+                </div>
+
+                <!-- H.265 -->
+                <div class="border-t border-black pt-6">
+                    <div class="flex items-baseline justify-between mb-4">
+                        <h3 class="text-2xl font-bold">H.265</h3>
+                        <span class="text-xs font-mono text-gray-500">HEVC</span>
+                    </div>
+                    <p class="text-gray-600 mb-6 text-sm">
+                        Designed for 4K. Doubles compression efficiency but requires significant computational power to decode.
+                    </p>
+                    <div class="w-full bg-gray-200 h-1">
+                        <div class="bg-black h-1 w-3/4"></div>
+                    </div>
+                    <span class="type-label mt-2 block text-xs">Efficiency: 75%</span>
+                </div>
+
+                <!-- AV1 -->
+                <div class="border-t border-[var(--swiss-red)] pt-6">
+                    <div class="flex items-baseline justify-between mb-4">
+                        <h3 class="text-2xl font-bold text-[var(--swiss-red)]">AV1</h3>
+                        <span class="text-xs font-mono text-gray-500">OPEN MEDIA</span>
+                    </div>
+                    <p class="text-gray-600 mb-6 text-sm">
+                        Royalty-free. The future of streaming. Superior compression performance for next-generation content.
+                    </p>
+                    <div class="w-full bg-gray-200 h-1">
+                        <div class="bg-[var(--swiss-red)] h-1 w-full"></div>
+                    </div>
+                    <span class="type-label mt-2 block text-xs">Efficiency: 90%</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-white py-12 border-t border-gray-200">
+        <div class="max-w-7xl mx-auto px-6 swiss-container flex flex-col md:flex-row justify-between items-start md:items-center">
+            <div>
+                <span class="font-bold tracking-tight">COMPRESSION 101</span>
+                <p class="text-xs text-gray-500 mt-2 max-w-xs">
+                    Designed according to international standards for information display.
+                </p>
+            </div>
+            <div class="flex gap-8 mt-8 md:mt-0">
+                <a href="#" class="type-label hover:text-[var(--swiss-red)]">Github</a>
+                <a href="#" class="type-label hover:text-[var(--swiss-red)]">Twitter</a>
+                <a href="#" class="type-label hover:text-[var(--swiss-red)]">Reference</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+
+        // -----------------------
+        // Intersection Observer
+        // -----------------------
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.fade-up').forEach(section => observer.observe(section));
+
+        // -----------------------
+        // Spatial Demo (Monochrome Grid)
+        // -----------------------
+        const spatialContainer = document.getElementById('spatial-demo');
+        const compressedStat = document.getElementById('compressed-stat');
+        const gridSize = 16;
+        
+        for(let i = 0; i < gridSize * gridSize; i++) {
+            const div = document.createElement('div');
+            // Greyscale values
+            const val = Math.floor(Math.random() * 50) + 200; // Light greys
+            
+            div.style.backgroundColor = `rgb(${val}, ${val}, ${val})`;
+            div.style.width = '6.25%';
+            div.style.height = '6.25%';
+            div.style.float = 'left';
+            div.className = 'border border-white/50 transition-colors duration-200';
+            
+            div.addEventListener('mouseenter', () => highlightNeighbors(i));
+            spatialContainer.appendChild(div);
+        }
+
+        function highlightNeighbors(index) {
+            // Clear previous
+            Array.from(spatialContainer.children).forEach(c => {
+                c.style.backgroundColor = c.dataset.origColor || c.style.backgroundColor;
+                if(!c.dataset.origColor) c.dataset.origColor = c.style.backgroundColor;
+            });
+
+            // Highlight 2x2 block
+            const indices = [index, index+1, index+gridSize, index+gridSize+1];
+            indices.forEach(idx => {
+                if(spatialContainer.children[idx]) {
+                    // Turn "active" pixels to Swiss Red or Dark Grey
+                    spatialContainer.children[idx].style.backgroundColor = '#FF3300';
+                }
+            });
+            
+            compressedStat.innerText = "BLOCK ENCODED (4:1)";
+            compressedStat.style.color = "#FF3300";
+        }
+        
+        spatialContainer.addEventListener('mouseleave', () => {
+             compressedStat.innerText = "Hover Grid to Analyze";
+             compressedStat.style.color = "inherit";
+             Array.from(spatialContainer.children).forEach(c => {
+                 if(c.dataset.origColor) c.style.backgroundColor = c.dataset.origColor;
+             });
+        });
+
+        // -----------------------
+        // Temporal Canvas (Swiss Style)
+        // -----------------------
+        const canvas = document.getElementById('motionCanvas');
+        const ctx = canvas.getContext('2d');
+        const savingsDisplay = document.getElementById('savings-display');
+        let mode = 'original';
+
+        function resizeCanvas() {
+            const parent = canvas.parentElement;
+            canvas.width = parent.clientWidth;
+            canvas.height = parent.clientHeight;
+        }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        let ballX = 50, ballY = 200, ballSpeed = 5, time = 0;
+
+        function setMode(newMode) {
+            mode = newMode;
+            const btnOrig = document.getElementById('btn-orig');
+            const btnDiff = document.getElementById('btn-diff');
+            
+            if (newMode === 'original') {
+                btnOrig.className = "px-4 py-2 text-xs font-bold uppercase bg-black text-white";
+                btnDiff.className = "px-4 py-2 text-xs font-bold uppercase border border-black hover:bg-black hover:text-white transition-colors";
+            } else {
+                btnOrig.className = "px-4 py-2 text-xs font-bold uppercase border border-black hover:bg-black hover:text-white transition-colors";
+                btnDiff.className = "px-4 py-2 text-xs font-bold uppercase bg-[var(--swiss-red)] text-white border border-[var(--swiss-red)]";
+            }
+        }
+
+        function drawScene(isDiff) {
+            // Clear
+            ctx.fillStyle = isDiff ? '#ffffff' : '#f4f4f4'; 
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            if(isDiff) {
+                 // Grid for null space
+                ctx.strokeStyle = '#e5e5e5';
+                ctx.lineWidth = 1;
+                for(let i=0; i<canvas.width; i+=40) {
+                    ctx.beginPath(); ctx.moveTo(i,0); ctx.lineTo(i,canvas.height); ctx.stroke();
+                }
+                for(let i=0; i<canvas.height; i+=40) {
+                    ctx.beginPath(); ctx.moveTo(0,i); ctx.lineTo(canvas.width,i); ctx.stroke();
+                }
+            } else {
+                // Geometric Mountains
+                ctx.fillStyle = '#1a1a1a';
+                ctx.beginPath();
+                ctx.moveTo(0, canvas.height);
+                ctx.lineTo(150, canvas.height - 200);
+                ctx.lineTo(300, canvas.height);
+                ctx.fill();
+                
+                ctx.fillStyle = '#333333';
+                ctx.beginPath();
+                ctx.moveTo(200, canvas.height);
+                ctx.lineTo(350, canvas.height - 150);
+                ctx.lineTo(500, canvas.height);
+                ctx.fill();
+            }
+
+            // Ball (International Orange)
+            ctx.fillStyle = '#FF3300';
+            ctx.beginPath();
+            ctx.arc(ballX, ballY, 25, 0, Math.PI * 2);
+            ctx.fill();
+            
+            if(isDiff) {
+                // Vector Line
+                ctx.strokeStyle = '#000';
+                ctx.lineWidth = 2;
+                ctx.beginPath();
+                ctx.moveTo(ballX - ballSpeed*6, ballY);
+                ctx.lineTo(ballX, ballY);
+                ctx.stroke();
+                
+                // Text Label
+                ctx.fillStyle = '#000';
+                ctx.font = "bold 12px Inter";
+                ctx.fillText(`VECTOR: [${ballSpeed}, 0]`, ballX - 40, ballY - 40);
+                
+                savingsDisplay.innerText = "DELTA ONLY (-90%)";
+                savingsDisplay.style.color = "#FF3300";
+            } else {
+                savingsDisplay.innerText = "FULL FRAME (0%)";
+                savingsDisplay.style.color = "#000000";
+            }
+        }
+
+        function animate() {
+            ballX += ballSpeed;
+            if (ballX > canvas.width - 30 || ballX < 30) ballSpeed *= -1;
+            ballY = 225; // Linear motion fits Swiss style better than wavy
+            
+            drawScene(mode === 'diff');
+            requestAnimationFrame(animate);
+        }
+        animate();
+    </script>
+</body>
+</html>
