@@ -12,7 +12,13 @@
 
         :root {
             --swiss-red: #FF3300;
+            --neo-yellow: #FFD60A;
+            --neo-blue: #007AFF;
+            --neo-purple: #BF5AF2;
+            --neo-black: #000000;
+            --neo-white: #FFFFFF;
             --grid-color: #e5e5e5;
+            --shadow-offset: 4px;
         }
 
         body {
@@ -64,36 +70,53 @@
 
         /* Components */
         .btn-swiss {
-            background: transparent;
-            border: 1px solid black;
-            color: black;
+            background: var(--neo-white);
+            border: 3px solid var(--neo-black);
+            color: var(--neo-black);
             padding: 1rem 2rem;
-            font-weight: 600;
+            font-weight: 700;
             text-transform: uppercase;
-            font-size: 0.8rem;
+            font-size: 0.9rem;
             letter-spacing: 0.05em;
             transition: all 0.2s;
-            border-radius: 0;
+            box-shadow: var(--shadow-offset) var(--shadow-offset) 0px 0px var(--neo-black);
         }
 
         .btn-swiss:hover {
-            background: black;
-            color: white;
+            background: var(--neo-yellow);
+            transform: translate(-2px, -2px);
+            box-shadow: 6px 6px 0px 0px var(--neo-black);
+            color: var(--neo-black);
         }
 
-        .btn-swiss-accent {
-            background: var(--swiss-red);
-            border: 1px solid var(--swiss-red);
-            color: white;
-        }
-
-        .btn-swiss-accent:hover {
-            background: white;
-            color: var(--swiss-red);
+        .btn-swiss:active {
+            transform: translate(2px, 2px);
+            box-shadow: 2px 2px 0px 0px var(--neo-black);
         }
 
         /* Animations */
 
+
+        /* Neo-Brutalist Utilities */
+        .neo-border {
+            border: 3px solid var(--neo-black);
+        }
+
+        .neo-shadow {
+            box-shadow: var(--shadow-offset) var(--shadow-offset) 0px 0px var(--neo-black);
+        }
+
+        .neo-box {
+            background-color: var(--neo-white);
+            border: 3px solid var(--neo-black);
+            box-shadow: var(--shadow-offset) var(--shadow-offset) 0px 0px var(--neo-black);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .neo-box:hover {
+            transform: translate(-2px, -2px);
+            box-shadow: 6px 6px 0px 0px var(--neo-black);
+        }
 
         /* Grid Background Pattern */
         .bg-grid-lines {
@@ -101,6 +124,12 @@
             background-image:
                 linear-gradient(to right, #f0f0f0 1px, transparent 1px),
                 linear-gradient(to bottom, #f0f0f0 1px, transparent 1px);
+        }
+
+        .bg-dots {
+            background-image: radial-gradient(var(--neo-black) 1px, transparent 1px);
+            background-size: 24px 24px;
+            opacity: 0.1;
         }
 
 
@@ -143,17 +172,25 @@
             max-width: 100%;
             height: auto;
             margin: 2rem 0;
-            border: 1px solid #e5e5e5;
+            border: 3px solid var(--neo-black);
+            box-shadow: 6px 6px 0px 0px var(--neo-black);
         }
 
         .markdown-content blockquote {
-            border-left: 4px solid var(--swiss-red);
+            border: 3px solid var(--neo-black);
+            box-shadow: 4px 4px 0px 0px var(--neo-black);
             padding-left: 1.5rem;
-            font-style: italic;
+            font-style: normal;
             margin-top: 2rem;
-            margin-bottom: 1rem;
-            background: #f9f9f9;
-            padding: 1.5rem 1.5rem 1rem 1.5rem;
+            margin-bottom: 2rem;
+            background: #fffbeb;
+            /* Light yellow tint */
+            padding: 1.5rem 1.5rem 0.5rem 1.5rem;
+        }
+
+        .markdown-content blockquote h3,
+        .markdown-content blockquote h4 {
+            margin-top: 0;
         }
 
         .markdown-content a {
@@ -243,27 +280,40 @@
     </nav>
 
     <!-- Hero Section (Intro) -->
-    <header class="min-h-[80vh] pt-16 flex flex-col relative bg-white">
+    <header class="min-h-[80vh] pt-16 flex flex-col relative bg-[#ff9f1c] overflow-hidden">
         <!-- Grid Background -->
-        <div class="absolute inset-0 bg-grid-lines -z-10"></div>
+        <div class="absolute inset-0 bg-dots -z-10"></div>
 
-        <div class="max-w-7xl mx-auto w-full flex-1 flex flex-col justify-center px-6 md:px-12 swiss-container">
-            <div class="grid grid-cols-1 md:grid-cols-12 gap-8 mb-12">
+        <!-- Geometric Shapes Decoration -->
+        <div class="absolute top-20 right-[-50px] w-64 h-64 bg-[#2ec4b6] rounded-full border-4 border-black opacity-50">
+        </div>
+        <div class="absolute bottom-20 left-[-50px] w-48 h-48 bg-[#ffbf69] rotate-45 border-4 border-black"></div>
+
+        <div
+            class="max-w-7xl mx-auto w-full flex-1 flex flex-col justify-center px-6 md:px-12 swiss-container relative z-10">
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-8 mb-12 items-center">
                 <div class="md:col-span-8">
-                    <span class="type-label text-[var(--swiss-red)] mb-4 block">• Technical Guide</span>
-                    <h1 class="type-huge">
+                    <div
+                        class="inline-flex items-center space-x-2 bg-white border-2 border-black px-4 py-2 mb-8 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
+                        <span class="w-3 h-3 bg-red-500 rounded-full border border-black animate-pulse"></span>
+                        <span class="text-xs font-bold uppercase tracking-wider">Technical Guide</span>
+                    </div>
+                    <h1 class="type-huge text-white" style="text-shadow: 6px 6px 0px #000;">
                         DIGITAL VIDEO<br>
                         INTRODUCTION.
                     </h1>
                 </div>
                 <div class="md:col-span-4 flex flex-col justify-end pb-4">
-                    <p class="text-xl leading-relaxed mb-8 font-light">
-                        A gentle introduction to video technology for software developers and engineers.
-                    </p>
-                    <div>
-                        <a href="#basic-terminology" class="btn-swiss inline-flex items-center">
-                            Start Reading <i data-lucide="arrow-down" class="ml-2 w-4 h-4"></i>
-                        </a>
+                    <div class="bg-white p-6 border-3 border-black neo-shadow transform rotate-2">
+                        <p class="text-xl leading-relaxed mb-8 font-bold">
+                            A gentle introduction to video technology for software developers and engineers.
+                        </p>
+                        <div>
+                            <a href="#basic-terminology"
+                                class="btn-swiss inline-flex items-center w-full justify-center">
+                                Start Reading <i data-lucide="arrow-down" class="ml-2 w-4 h-4"></i>
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -272,7 +322,9 @@
 
     <section id="intro" class="py-24 bg-white swiss-border-b">
         <div class="max-w-7xl mx-auto px-6 md:px-12 swiss-container">
-            <span class="type-label mb-6 block text-[var(--swiss-red)]">Section</span>
+            <div
+                class="inline-block bg-black text-white px-3 py-1 font-bold text-sm mb-4 neo-shadow border-2 border-black">
+                SECTION</div>
             <h2 class="type-display mb-12">Intro</h2>
 
             <div class="markdown-content max-w-4xl">
@@ -305,7 +357,9 @@ cd digital_video_introduction
 
     <section id="changelog" class="py-24 bg-white swiss-border-b">
         <div class="max-w-7xl mx-auto px-6 md:px-12 swiss-container fade-up">
-            <span class="type-label mb-6 block text-[var(--swiss-red)]">Section</span>
+            <div
+                class="inline-block bg-black text-white px-3 py-1 font-bold text-sm mb-4 neo-shadow border-2 border-black">
+                SECTION</div>
             <h2 class="type-display mb-12">Changelog</h2>
 
             <div class="markdown-content max-w-4xl">
@@ -325,7 +379,9 @@ cd digital_video_introduction
 
     <section id="basic-terminology" class="py-24 bg-white swiss-border-b">
         <div class="max-w-7xl mx-auto px-6 md:px-12 swiss-container fade-up">
-            <span class="type-label mb-6 block text-[var(--swiss-red)]">Section</span>
+            <div
+                class="inline-block bg-black text-white px-3 py-1 font-bold text-sm mb-4 neo-shadow border-2 border-black">
+                SECTION</div>
             <h2 class="type-display mb-12">Basic terminology</h2>
 
             <div class="markdown-content max-w-4xl">
@@ -333,7 +389,8 @@ cd digital_video_introduction
                 <p>An <strong>image</strong> can be thought of as a <strong>2D matrix</strong>. If we think about
                     <strong>colors</strong>, we can extrapolate this idea seeing this image as a <strong>3D
                         matrix</strong> where the <strong>additional dimensions</strong> are used to provide
-                    <strong>color data</strong>.</p>
+                    <strong>color data</strong>.
+                </p>
                 <p>If we chose to represent these colors using the <a
                         href="https://en.wikipedia.org/wiki/Primary_color">primary colors (red, green and blue)</a>, we
                     define three planes: the first one for <strong>red</strong>, the second for <strong>green</strong>,
@@ -346,7 +403,8 @@ cd digital_video_introduction
                     <strong>red pixel</strong> means 0 of green, 0 of blue and maximum of red. The <strong>pink color
                         pixel</strong> can be formed with a combination of the three colors. Using a representative
                     numeric range from 0 to 255, the pink pixel is defined by <strong>Red=255, Green=192 and
-                        Blue=203</strong>.</p>
+                        Blue=203</strong>.
+                </p>
                 <blockquote>
                     <h4>Other ways to encode a color image</h4>
                     <p>Many other possible models may be used to represent the colors that make up an image. We could,
@@ -394,7 +452,8 @@ cd digital_video_introduction
                 </p>
                 <p>When people says this movie or picture is <strong>16x9</strong> they usually are referring to the
                     <strong>Display Aspect Ratio (DAR)</strong>, however we also can have different shapes of individual
-                    pixels, we call this <strong>Pixel Aspect Ratio (PAR)</strong>.</p>
+                    pixels, we call this <strong>Pixel Aspect Ratio (PAR)</strong>.
+                </p>
                 <p><img alt="display aspect ratio" src="References/digital_video_introduction/i/DAR.png"
                         title="display aspect ratio" /></p>
                 <p><img alt="pixel aspect ratio" src="References/digital_video_introduction/i/PAR.png"
@@ -414,7 +473,8 @@ cd digital_video_introduction
                 </blockquote>
                 <p>For example, a video with 30 frames per second, 24 bits per pixel, resolution of 480x240 will need
                     <strong>82,944,000 bits per second</strong> or 82.944 Mbps (30x480x240x24) if we don't employ any
-                    kind of compression.</p>
+                    kind of compression.
+                </p>
                 <p>When the <strong>bit rate</strong> is nearly constant it's called constant bit rate
                     (<strong>CBR</strong>) but it also can vary then called variable bit rate (<strong>VBR</strong>).
                 </p>
@@ -427,7 +487,8 @@ cd digital_video_introduction
                 <p>In the early days, engineers came up with a technique for doubling the perceived frame rate of a
                     video display <strong>without consuming extra bandwidth</strong>. This technique is known as
                     <strong>interlaced video</strong>; it basically sends half of the screen in 1 "frame" and the other
-                    half in the next "frame".</p>
+                    half in the next "frame".
+                </p>
                 <p>Today screens render mostly using <strong>progressive scan technique</strong>. Progressive is a way
                     of displaying, storing, or transmitting moving images in which all the lines of each frame are drawn
                     in sequence.</p>
@@ -437,7 +498,8 @@ cd digital_video_introduction
                 <p>Now we have an idea about how an <strong>image</strong> is represented digitally, how its
                     <strong>colors</strong> are arranged, how many <strong>bits per second</strong> do we spend to show
                     a video, if it's constant (CBR) or variable (VBR), with a given <strong>resolution</strong> using a
-                    given <strong>frame rate</strong> and many other terms such as interlaced, PAR and others.</p>
+                    given <strong>frame rate</strong> and many other terms such as interlaced, PAR and others.
+                </p>
                 <blockquote>
                     <h4>Hands-on: Check video properties</h4>
                     <p>You can <a
@@ -451,7 +513,9 @@ cd digital_video_introduction
 
     <section id="redundancy-removal" class="py-24 bg-white swiss-border-b">
         <div class="max-w-7xl mx-auto px-6 md:px-12 swiss-container fade-up">
-            <span class="type-label mb-6 block text-[var(--swiss-red)]">Section</span>
+            <div
+                class="inline-block bg-black text-white px-3 py-1 font-bold text-sm mb-4 neo-shadow border-2 border-black">
+                SECTION</div>
             <h2 class="type-display mb-12">Redundancy removal</h2>
 
             <div class="markdown-content max-w-4xl">
@@ -483,7 +547,8 @@ cd digital_video_introduction
                         The <a href="http://www.biologymad.com/nervoussystem/eyenotes.htm">eye is a complex organ</a>,
                         it is composed of many parts but we are mostly interested in the cones and rods cells. The eye
                         <a href="https://en.wikipedia.org/wiki/Photoreceptor_cell">contains about 120 million rod cells
-                            and 6 million cone cells</a>.</p>
+                            and 6 million cone cells</a>.
+                    </p>
                     <p>To <strong>oversimplify</strong>, let's try to put colors and brightness in the eye's parts
                         function. The <strong><a href="https://en.wikipedia.org/wiki/Rod_cell">rod cells</a> are mostly
                             responsible for brightness</strong> while the <strong><a
@@ -553,7 +618,8 @@ G = Y - 0.344Cb - 0.714Cr
                 <p>With the image represented as luma and chroma components, we can take advantage of the human visual
                     system's greater sensitivity for luma resolution rather than chroma to selectively remove
                     information. <strong>Chroma subsampling</strong> is the technique of encoding images using
-                    <strong>less resolution for chroma than for luma</strong>.</p>
+                    <strong>less resolution for chroma than for luma</strong>.
+                </p>
                 <p><img alt="ycbcr subsampling resolutions"
                         src="References/digital_video_introduction/i/ycbcr_subsampling_resolution.png"
                         title="ycbcr subsampling resolutions" /></p>
@@ -561,20 +627,24 @@ G = Y - 0.344Cb - 0.714Cr
                     that describe how to handle resolution and the merge (<code>final color = Y + Cb + Cr</code>).</p>
                 <p>These schemas are known as subsampling systems and are expressed as a 3 part ratio -
                     <code>a:x:y</code> which defines the chroma resolution in relation to a <code>a x 2</code> block of
-                    luma pixels.</p>
+                    luma pixels.
+                </p>
                 <ul>
                     <li><code>a</code> is the horizontal sampling reference (usually 4)</li>
                     <li><code>x</code> is the number of chroma samples in the first row of <code>a</code> pixels
                         (horizontal resolution in relation to <code>a</code>)</li>
                     <li><code>y</code> is the number of changes of chroma samples between the first and seconds rows of
-                        <code>a</code> pixels.</li>
+                        <code>a</code> pixels.
+                    </li>
                 </ul>
                 <blockquote>
                     <p>An exception to this exists with 4:1:0, which provides a single chroma sample within each
-                        <code>4 x 4</code> block of luma resolution.</p>
+                        <code>4 x 4</code> block of luma resolution.
+                    </p>
                 </blockquote>
                 <p>Common schemes used in modern codecs are: <strong>4:4:4</strong> <em>(no subsampling)</em>,
-                    <strong>4:2:2, 4:1:1, 4:2:0, 4:1:0 and 3:1:1</strong>.</p>
+                    <strong>4:2:2, 4:1:1, 4:2:0, 4:1:0 and 3:1:1</strong>.
+                </p>
                 <blockquote>
                     <p>You can follow some discussions <a
                             href="https://github.com/leandromoreira/digital_video_introduction/issues?q=YCbCr">to learn
@@ -604,7 +674,8 @@ G = Y - 0.344Cb - 0.714Cr
                     <h3>Hands-on: Check YCbCr histogram</h3>
                     <p>You can <a href="/encoding_pratical_examples.md#generates-yuv-histogram">check the YCbCr
                             histogram with ffmpeg.</a> This scene has a higher blue contribution, which is showed by the
-                        <a href="https://en.wikipedia.org/wiki/Histogram">histogram</a>.</p>
+                        <a href="https://en.wikipedia.org/wiki/Histogram">histogram</a>.
+                    </p>
                     <p><img alt="ycbcr color histogram" src="References/digital_video_introduction/i/yuv_histogram.png"
                             title="ycbcr color histogram" /></p>
                 </blockquote>
@@ -639,7 +710,8 @@ ffplay -f lavfi -i 'testsrc2=size=1280x720:rate=30000/1001,format=yuv420p' -vf o
                 </p>
                 <p>We can see <strong>lots of repetitions</strong> within frames like <strong>the blue
                         background</strong>, it doesn't change from frame 0 to frame 3. To tackle this problem, we can
-                    <strong>abstractly categorize</strong> them as three types of frames.</p>
+                    <strong>abstractly categorize</strong> them as three types of frames.
+                </p>
                 <h3>I Frame (intra, keyframe)</h3>
                 <p>An I-frame (reference, keyframe, intra) is a <strong>self-contained frame</strong>. It doesn't rely
                     on anything to be rendered, an I-frame looks similar to a static photo. The first frame is usually
@@ -719,7 +791,8 @@ ffplay -f lavfi -i 'testsrc2=size=1280x720:rate=30000/1001,format=yuv420p' -vf o
                     <strong>x</strong> and <strong>y</strong> values are the <strong>motion vectors</strong>. One
                     <strong>further step</strong> we can do to save bits is to <strong>encode only the motion vector
                         difference</strong> between the last block position and the predicted, so the final motion
-                    vector would be <code>x=6 (6-0), y=1 (26-25)</code></p>
+                    vector would be <code>x=6 (6-0), y=1 (26-25)</code>
+                </p>
                 <blockquote>
                     <p>In a real-world situation, this <strong>ball would be sliced into n partitions</strong> but the
                         process is the same.</p>
@@ -808,7 +881,9 @@ ffplay -f lavfi -i 'testsrc2=size=1280x720:rate=30000/1001,format=yuv420p' -vf o
 
     <section id="how-does-a-video-codec-work" class="py-24 bg-white swiss-border-b">
         <div class="max-w-7xl mx-auto px-6 md:px-12 swiss-container fade-up">
-            <span class="type-label mb-6 block text-[var(--swiss-red)]">Section</span>
+            <div
+                class="inline-block bg-black text-white px-3 py-1 font-bold text-sm mb-4 neo-shadow border-2 border-black">
+                SECTION</div>
             <h2 class="type-display mb-12">How does a video codec work?</h2>
 
             <div class="markdown-content max-w-4xl">
@@ -833,7 +908,8 @@ ffplay -f lavfi -i 'testsrc2=size=1280x720:rate=30000/1001,format=yuv420p' -vf o
                         container and a file named <code>video.mkv</code> it's probably a <strong><a
                                 href="https://en.wikipedia.org/wiki/Matroska">matroska</a></strong>. To be completely
                         sure about the codec and container format we can use <a
-                            href="/encoding_pratical_examples.md#inspect-stream">ffmpeg or mediainfo</a>.</p>
+                            href="/encoding_pratical_examples.md#inspect-stream">ffmpeg or mediainfo</a>.
+                    </p>
                 </blockquote>
                 <h2>History</h2>
                 <p>Before we jump into the inner workings of a generic codec, let's look back to understand a little
@@ -847,13 +923,15 @@ ffplay -f lavfi -i 'testsrc2=size=1280x720:rate=30000/1001,format=yuv420p' -vf o
                     <strong>royalty-free</strong> lossy video compression called <strong>VP3</strong>. In 2008,
                     <strong>Google bought</strong> this company, releasing <strong>VP8</strong> in the same year. In
                     December of 2012, Google released the <strong>VP9</strong> and it's <strong>supported by roughly ¾
-                        of the browser market</strong> (mobile included).</p>
+                        of the browser market</strong> (mobile included).
+                </p>
                 <p><strong><a href="https://en.wikipedia.org/wiki/AOMedia_Video_1">AV1</a></strong> is a new
                     <strong>royalty-free</strong> and open source video codec that's being designed by the <a
                         href="http://aomedia.org/">Alliance for Open Media (AOMedia)</a>, which is composed of the
                     <strong>companies: Google, Mozilla, Microsoft, Amazon, Netflix, AMD, ARM, NVidia, Intel and
                         Cisco</strong> among others. The <strong>first version</strong> 0.1.0 of the reference codec was
-                    <strong>published on April 7, 2016</strong>.</p>
+                    <strong>published on April 7, 2016</strong>.
+                </p>
                 <p><img alt="codec history timeline"
                         src="References/digital_video_introduction/i/codec_history_timeline.png"
                         title="codec history timeline" /></p>
@@ -924,7 +1002,8 @@ ffplay -f lavfi -i 'testsrc2=size=1280x720:rate=30000/1001,format=yuv420p' -vf o
                 <p>After we get the residual block (<code>predicted partition - real partition</code>), we can
                     <strong>transform</strong> it in a way that lets us know which <strong>pixels we can
                         discard</strong> while keeping the <strong>overall quality</strong>. There are some
-                    transformations for this exact behavior.</p>
+                    transformations for this exact behavior.
+                </p>
                 <p>Although there are <a
                         href="https://en.wikipedia.org/wiki/List_of_Fourier-related_transforms#Discrete_transforms">other
                         transformations</a>, we'll look more closely at the discrete cosine transform (DCT). The <a
@@ -932,7 +1011,8 @@ ffplay -f lavfi -i 'testsrc2=size=1280x720:rate=30000/1001,format=yuv420p' -vf o
                     features are:</p>
                 <ul>
                     <li><strong>converts</strong> blocks of <strong>pixels</strong> into same-sized blocks of
-                        <strong>frequency coefficients</strong>.</li>
+                        <strong>frequency coefficients</strong>.
+                    </li>
                     <li><strong>compacts</strong> energy, making it easy to eliminate spatial redundancy.</li>
                     <li>is <strong>reversible</strong>, a.k.a. you can reverse to pixels.</li>
                 </ul>
@@ -961,7 +1041,8 @@ ffplay -f lavfi -i 'testsrc2=size=1280x720:rate=30000/1001,format=yuv420p' -vf o
                 <p>As you can see it looks nothing like the original image, we might notice that the <strong>first
                         coefficient</strong> is very different from all the others. This first coefficient is known as
                     the DC coefficient which represents <strong>all the samples</strong> in the input array, something
-                    <strong>similar to an average</strong>.</p>
+                    <strong>similar to an average</strong>.
+                </p>
                 <p>This block of coefficients has an interesting property which is that it separates the high-frequency
                     components from the low frequency.</p>
                 <p><img alt="dct frequency coefficients property"
@@ -971,7 +1052,8 @@ ffplay -f lavfi -i 'testsrc2=size=1280x720:rate=30000/1001,format=yuv420p' -vf o
                         href="https://web.archive.org/web/20150129171151/https://www.iem.thm.de/telekom-labor/zinke/mk/mpeg2beg/whatisit.htm"><strong>lower
                             frequencies</strong></a>, so if we transform an image into its frequency components and
                     <strong>throw away the higher frequency coefficients</strong>, we can <strong>reduce the amount of
-                        data</strong> needed to describe the image without sacrificing too much image quality.</p>
+                        data</strong> needed to describe the image without sacrificing too much image quality.
+                </p>
                 <blockquote>
                     <p>frequency means how fast a signal is changing</p>
                 </blockquote>
@@ -1026,7 +1108,8 @@ ffplay -f lavfi -i 'testsrc2=size=1280x720:rate=30000/1001,format=yuv420p' -vf o
                 <p><img alt="quantize" src="References/digital_video_introduction/i/quantize.png" title="quantize" />
                 </p>
                 <p>How can we <strong>reverse</strong> (re-quantize) this block of coefficients? We can do that by
-                    <strong>multiplying the same value</strong> (10) we divide it first.</p>
+                    <strong>multiplying the same value</strong> (10) we divide it first.
+                </p>
                 <p><img alt="re-quantize" src="References/digital_video_introduction/i/re-quantize.png"
                         title="re-quantize" /></p>
                 <p>This <strong>approach isn't the best</strong> because it doesn't take into account the importance of
@@ -1050,7 +1133,8 @@ ffplay -f lavfi -i 'testsrc2=size=1280x720:rate=30000/1001,format=yuv420p' -vf o
                 <h3>VLC coding:</h3>
                 <p>Let's suppose we have a stream of the symbols: <strong>a</strong>, <strong>e</strong>,
                     <strong>r</strong> and <strong>t</strong> and their probability (from 0 to 1) is represented by this
-                    table.</p>
+                    table.
+                </p>
                 <table>
                     <thead>
                         <tr>
@@ -1107,7 +1191,8 @@ ffplay -f lavfi -i 'testsrc2=size=1280x720:rate=30000/1001,format=yuv420p' -vf o
                     symbol is <strong>a</strong> which is added (not in a mathematical way) <code>[10][0]</code> and
                     finally the third symbol <strong>t</strong> which makes our final compressed bitstream to be
                     <code>[10][0][1110]</code> or <code>1001110</code> which only requires <strong>7 bits</strong> (3.4
-                    times less space than the original).</p>
+                    times less space than the original).
+                </p>
                 <p>Notice that each code must be a unique prefixed code <a
                         href="https://en.wikipedia.org/wiki/Huffman_coding">Huffman can help you to find these
                         numbers</a>. Though it has some issues there are <a
@@ -1119,7 +1204,8 @@ ffplay -f lavfi -i 'testsrc2=size=1280x720:rate=30000/1001,format=yuv420p' -vf o
                 <h3>Arithmetic coding:</h3>
                 <p>Let's suppose we have a stream of the symbols: <strong>a</strong>, <strong>e</strong>,
                     <strong>r</strong>, <strong>s</strong> and <strong>t</strong> and their probability is represented
-                    by this table.</p>
+                    by this table.
+                </p>
                 <table>
                     <thead>
                         <tr>
@@ -1154,23 +1240,27 @@ ffplay -f lavfi -i 'testsrc2=size=1280x720:rate=30000/1001,format=yuv420p' -vf o
                 <p>Let's continue to encode our stream <strong>eat</strong>, now we take the second symbol
                     <strong>a</strong> which is within the new subrange <strong>0.3 to 0.39</strong> and then we take
                     our last symbol <strong>t</strong> and we do the same process again and we get the last subrange
-                    <strong>0.354 to 0.372</strong>.</p>
+                    <strong>0.354 to 0.372</strong>.
+                </p>
                 <p><img alt="final arithmetic range" src="References/digital_video_introduction/i/arithimetic_range.png"
                         title="final arithmetic range" /></p>
                 <p>We just need to pick a number within the last subrange <strong>0.354 to 0.372</strong>, let's choose
                     <strong>0.36</strong> but we could choose any number within this subrange. With
                     <strong>only</strong> this number we'll be able to recover our original stream <strong>eat</strong>.
                     If you think about it, it's like if we were drawing a line within ranges of ranges to encode our
-                    stream.</p>
+                    stream.
+                </p>
                 <p><img alt="final range traverse" src="References/digital_video_introduction/i/range_show.png"
                         title="final range traverse" /></p>
                 <p>The <strong>reverse process</strong> (A.K.A. decoding) is equally easy, with our number
                     <strong>0.36</strong> and our original range we can run the same process but now using this number
-                    to reveal the stream encoded behind this number.</p>
+                    to reveal the stream encoded behind this number.
+                </p>
                 <p>With the first range, we notice that our number fits at the slice, therefore, it's our first symbol,
                     now we split this subrange again, doing the same process as before, and we'll notice that
                     <strong>0.36</strong> fits the symbol <strong>a</strong> and after we repeat the process we came to
-                    the last symbol <strong>t</strong> (forming our original encoded stream <em>eat</em>).</p>
+                    the last symbol <strong>t</strong> (forming our original encoded stream <em>eat</em>).
+                </p>
                 <p>Both encoder and decoder <strong>must know</strong> the symbol probability table, therefore you need
                     to send the table.</p>
                 <p>Pretty neat, isn't it? People are damn smart to come up with a such solution, some <a
@@ -1225,7 +1315,8 @@ ffplay -f lavfi -i 'testsrc2=size=1280x720:rate=30000/1001,format=yuv420p' -vf o
                             marker</a></strong> to define the boundaries of the NAL's units. Each synchronization marker
                     holds a value of <code>0x00 0x00 0x01</code> except to the very first one which is
                     <code>0x00 0x00 0x00 0x01</code>. If we run the <strong>hexdump</strong> on the generated h264
-                    bitstream, we can identify at least three NALs in the beginning of the file.</p>
+                    bitstream, we can identify at least three NALs in the beginning of the file.
+                </p>
                 <p><img alt="synchronization marker on NAL units"
                         src="References/digital_video_introduction/i/minimal_yuv420_hex.png"
                         title="synchronization marker on NAL units" /></p>
@@ -1296,20 +1387,23 @@ ffplay -f lavfi -i 'testsrc2=size=1280x720:rate=30000/1001,format=yuv420p' -vf o
                 </table>
                 <p>Usually, the first NAL of a bitstream is a <strong>SPS</strong>, this type of NAL is responsible for
                     informing the general encoding variables like <strong>profile</strong>, <strong>level</strong>,
-                    <strong>resolution</strong> and others.</p>
+                    <strong>resolution</strong> and others.
+                </p>
                 <p>If we skip the first synchronization marker we can decode the <strong>first byte</strong> to know
                     what <strong>type of NAL</strong> is the first one.</p>
                 <p>For instance the first byte after the synchronization marker is <code>01100111</code>, where the
                     first bit (<code>0</code>) is to the field <strong>forbidden_zero_bit</strong>, the next 2 bits
                     (<code>11</code>) tell us the field <strong>nal_ref_idc</strong> which indicates whether this NAL is
                     a reference field or not and the rest 5 bits (<code>00111</code>) inform us the field
-                    <strong>nal_unit_type</strong>, in this case, it's a <strong>SPS</strong> (7) NAL unit.</p>
+                    <strong>nal_unit_type</strong>, in this case, it's a <strong>SPS</strong> (7) NAL unit.
+                </p>
                 <p>The second byte (<code>binary=01100100, hex=0x64, dec=100</code>) of an SPS NAL is the field
                     <strong>profile_idc</strong> which shows the profile that the encoder has used, in this case, we
                     used the <strong><a href="https://en.wikipedia.org/wiki/H.264/MPEG-4_AVC#Profiles">high
                             profile</a></strong>. Also the third byte contains several flags which determine the exact
                     profile (like constrained or progressive). But in our case the third byte is 0x00 and therefore the
-                    encoder has used just high profile.</p>
+                    encoder has used just high profile.
+                </p>
                 <p><img alt="SPS binary view" src="References/digital_video_introduction/i/minimal_yuv420_bin.png"
                         title="SPS binary view" /></p>
                 <p>When we read the H.264 bitstream spec for an SPS NAL we'll find many values for the <strong>parameter
@@ -1345,16 +1439,19 @@ ffplay -f lavfi -i 'testsrc2=size=1280x720:rate=30000/1001,format=yuv420p' -vf o
                     <strong>resolution</strong>. We can represent a <code>1920 x 1080</code> using a
                     <code>pic_width_in_mbs_minus_1</code> with the value of
                     <code>119 ( (119 + 1) * macroblock_size = 120 * 16 = 1920)</code>, again saving space, instead of
-                    encode <code>1920</code> we did it with <code>119</code>.</p>
+                    encode <code>1920</code> we did it with <code>119</code>.
+                </p>
                 <p>If we continue to examine our created video with a binary view (ex:
                     <code>xxd -b -c 11 v/minimal_yuv420.h264</code>), we can skip to the last NAL which is the frame
-                    itself.</p>
+                    itself.
+                </p>
                 <p><img alt="h264 idr slice header" src="References/digital_video_introduction/i/slice_nal_idr_bin.png"
                         title="h264 idr slice header" /></p>
                 <p>We can see its first 6 bytes values:
                     <code>01100101 10001000 10000100 00000000 00100001 11111111</code>. As we already know the first
                     byte tell us about what type of NAL it is, in this case, (<code>00101</code>) it's an <strong>IDR
-                        Slice (5)</strong> and we can further inspect it:</p>
+                        Slice (5)</strong> and we can further inspect it:
+                </p>
                 <p><img alt="h264 slice header spec" src="References/digital_video_introduction/i/slice_header.png"
                         title="h264 slice header spec" /></p>
                 <p>Using the spec info we can decode what type of slice (<strong>slice_type</strong>), the frame number
@@ -1363,7 +1460,8 @@ ffplay -f lavfi -i 'testsrc2=size=1280x720:rate=30000/1001,format=yuv420p' -vf o
                     decode it using a special decoder called <a
                         href="https://ghostarchive.org/archive/JBwdI">Exponential-Golomb</a>, this method is
                     <strong>very efficient to encode variable values</strong>, mostly when there are many default
-                    values.</p>
+                    values.
+                </p>
                 <blockquote>
                     <p>The values of <strong>slice_type</strong> and <strong>frame_num</strong> of this video are 7 (I
                         slice) and 0 (the first frame).</p>
@@ -1460,7 +1558,8 @@ ffplay -f lavfi -i 'testsrc2=size=1280x720:rate=30000/1001,format=yuv420p' -vf o
                 <p><img alt="token protection" src="References/digital_video_introduction/i/token_protection.png"
                         title="token_protection" /></p>
                 <p>The sole use of this token system still allows a user to download a video and distribute it. Then the
-                    <strong>DRM (digital rights management)</strong> systems can be used to try to avoid this.</p>
+                    <strong>DRM (digital rights management)</strong> systems can be used to try to avoid this.
+                </p>
                 <p><img alt="drm" src="References/digital_video_introduction/i/drm.png" title="drm" /></p>
                 <p>In real life production systems, people often use both techniques to provide authorization and
                     authentication.</p>
@@ -1499,13 +1598,15 @@ ffplay -f lavfi -i 'testsrc2=size=1280x720:rate=30000/1001,format=yuv420p' -vf o
                         instance, this key can be stored inside a special (read-only) chip that works like <a
                             href="https://en.wikipedia.org/wiki/Black_box">a black-box</a> to provide decryption, or
                         <strong>by software</strong> (less safe), the DRM system provides means to know which type of
-                        protection a given device has.</p>
+                        protection a given device has.
+                    </p>
                 </blockquote>
                 <p>When the <strong>player P1 wants to play</strong> the <strong>content C'1</strong>, it needs to deal
                     with the <strong>DRM system DRM1</strong>, giving its public key <strong>PUK1</strong>. The DRM
                     system DRM1 returns the <strong>key K1 encrypted</strong> with the client''s public key
                     <strong>PUK1</strong>. In theory, this response is something that <strong>only D1 is capable of
-                        decrypting</strong>.</p>
+                        decrypting</strong>.
+                </p>
                 <p><code>K1P1D1 = enc(K1, PUK1)</code></p>
                 <p><strong>P1</strong> uses its DRM local system (it could be a <a
                         href="https://en.wikipedia.org/wiki/System_on_a_chip">SOC</a>, a specialized hardware or
@@ -1565,154 +1666,145 @@ ffplay -f lavfi -i 'testsrc2=size=1280x720:rate=30000/1001,format=yuv420p' -vf o
                     inspired by. You can deepen your knowledge with these amazing links, books, videos and etc.</p>
                 <p>Online Courses and Tutorials:</p>
                 <ul>
-                    <li>https://www.coursera.org/learn/digital/</li>
-                    <li>https://people.xiph.org/~tterribe/pubs/lca2012/auckland/intro_to_video1.pdf</li>
-                    <li>https://xiph.org/video/vid1.shtml</li>
-                    <li>https://xiph.org/video/vid2.shtml</li>
-                    <li>https://wiki.multimedia.cx</li>
-                    <li>https://mahanstreamer.net</li>
-                    <li>http://slhck.info/ffmpeg-encoding-course</li>
-                    <li>http://www.cambridgeincolour.com/tutorials/camera-sensors.htm</li>
-                    <li>http://www.slideshare.net/vcodex/a-short-history-of-video-coding</li>
-                    <li>http://www.slideshare.net/vcodex/introduction-to-video-compression-13394338</li>
-                    <li>https://developer.android.com/guide/topics/media/media-formats.html</li>
-                    <li>http://www.slideshare.net/MadhawaKasun/audio-compression-23398426</li>
-                    <li>http://inst.eecs.berkeley.edu/~ee290t/sp04/lectures/02-Motion_Compensation_girod.pdf</li>
+                    <li><a href="https://www.coursera.org/learn/digital/">https://www.coursera.org/learn/digital/</a></li>
+                    <li><a href="https://people.xiph.org/~tterribe/pubs/lca2012/auckland/intro_to_video1.pdf">https://people.xiph.org/~tterribe/pubs/lca2012/auckland/intro_to_video1.pdf</a></li>
+                    <li><a href="https://xiph.org/video/vid1.shtml">https://xiph.org/video/vid1.shtml</a></li>
+                    <li><a href="https://xiph.org/video/vid2.shtml">https://xiph.org/video/vid2.shtml</a></li>
+                    <li><a href="https://wiki.multimedia.cx">https://wiki.multimedia.cx</a></li>
+                    <li><a href="https://mahanstreamer.net">https://mahanstreamer.net</a></li>
+                    <li><a href="http://slhck.info/ffmpeg-encoding-course">http://slhck.info/ffmpeg-encoding-course</a></li>
+                    <li><a href="http://www.cambridgeincolour.com/tutorials/camera-sensors.htm">http://www.cambridgeincolour.com/tutorials/camera-sensors.htm</a></li>
+                    <li><a href="http://www.slideshare.net/vcodex/a-short-history-of-video-coding">http://www.slideshare.net/vcodex/a-short-history-of-video-coding</a></li>
+                    <li><a href="http://www.slideshare.net/vcodex/introduction-to-video-compression-13394338">http://www.slideshare.net/vcodex/introduction-to-video-compression-13394338</a></li>
+                    <li><a href="https://developer.android.com/guide/topics/media/media-formats.html">https://developer.android.com/guide/topics/media/media-formats.html</a></li>
+                    <li><a href="http://www.slideshare.net/MadhawaKasun/audio-compression-23398426">http://www.slideshare.net/MadhawaKasun/audio-compression-23398426</a></li>
+                    <li><a href="http://inst.eecs.berkeley.edu/~ee290t/sp04/lectures/02-Motion_Compensation_girod.pdf">http://inst.eecs.berkeley.edu/~ee290t/sp04/lectures/02-Motion_Compensation_girod.pdf</a></li>
                 </ul>
                 <p>Books:</p>
                 <ul>
-                    <li>https://www.amazon.com/Understanding-Compression-Data-Modern-Developers/dp/1491961538/ref=sr_1_1?s=books&amp;ie=UTF8&amp;qid=1486395327&amp;sr=1-1
-                    </li>
-                    <li>https://www.amazon.com/H-264-Advanced-Video-Compression-Standard/dp/0470516925</li>
-                    <li>https://www.amazon.com/High-Efficiency-Video-Coding-HEVC/dp/3319068946</li>
-                    <li>https://www.amazon.com/Practical-Guide-Video-Audio-Compression/dp/0240806301/ref=sr_1_3?s=books&amp;ie=UTF8&amp;qid=1486396914&amp;sr=1-3&amp;keywords=A+PRACTICAL+GUIDE+TO+VIDEO+AUDIO
-                    </li>
-                    <li>https://www.amazon.com/Video-Encoding-Numbers-Eliminate-Guesswork/dp/0998453005/ref=sr_1_1?s=books&amp;ie=UTF8&amp;qid=1486396940&amp;sr=1-1&amp;keywords=jan+ozer
-                    </li>
+                    <li><a href="https://www.amazon.com/Understanding-Compression-Data-Modern-Developers/dp/1491961538/ref=sr_1_1?s=books&amp;ie=UTF8&amp;qid=1486395327&amp;sr=1-1">https://www.amazon.com/Understanding-Compression-Data-Modern-Developers/dp/1491961538/ref=sr_1_1?s=books&amp;ie=UTF8&amp;qid=1486395327&amp;sr=1-1</a></li>
+                    <li><a href="https://www.amazon.com/H-264-Advanced-Video-Compression-Standard/dp/0470516925">https://www.amazon.com/H-264-Advanced-Video-Compression-Standard/dp/0470516925</a></li>
+                    <li><a href="https://www.amazon.com/High-Efficiency-Video-Coding-HEVC/dp/3319068946">https://www.amazon.com/High-Efficiency-Video-Coding-HEVC/dp/3319068946</a></li>
+                    <li><a href="https://www.amazon.com/Practical-Guide-Video-Audio-Compression/dp/0240806301/ref=sr_1_3?s=books&amp;ie=UTF8&amp;qid=1486396914&amp;sr=1-3&amp;keywords=A+PRACTICAL+GUIDE+TO+VIDEO+AUDIO">https://www.amazon.com/Practical-Guide-Video-Audio-Compression/dp/0240806301/ref=sr_1_3?s=books&amp;ie=UTF8&amp;qid=1486396914&amp;sr=1-3&amp;keywords=A+PRACTICAL+GUIDE+TO+VIDEO+AUDIO</a></li>
+                    <li><a href="https://www.amazon.com/Video-Encoding-Numbers-Eliminate-Guesswork/dp/0998453005/ref=sr_1_1?s=books&amp;ie=UTF8&amp;qid=1486396940&amp;sr=1-1&amp;keywords=jan+ozer">https://www.amazon.com/Video-Encoding-Numbers-Eliminate-Guesswork/dp/0998453005/ref=sr_1_1?s=books&amp;ie=UTF8&amp;qid=1486396940&amp;sr=1-1&amp;keywords=jan+ozer</a></li>
                 </ul>
                 <p>Onboarding material:</p>
                 <ul>
-                    <li>https://github.com/Eyevinn/streaming-onboarding</li>
-                    <li>https://howvideo.works/</li>
-                    <li>https://www.aws.training/Details/eLearning?id=17775</li>
-                    <li>https://www.aws.training/Details/eLearning?id=17887</li>
-                    <li>https://www.aws.training/Details/Video?id=24750</li>
+                    <li><a href="https://github.com/Eyevinn/streaming-onboarding">https://github.com/Eyevinn/streaming-onboarding</a></li>
+                    <li><a href="https://howvideo.works/">https://howvideo.works/</a></li>
+                    <li><a href="https://www.aws.training/Details/eLearning?id=17775">https://www.aws.training/Details/eLearning?id=17775</a></li>
+                    <li><a href="https://www.aws.training/Details/eLearning?id=17887">https://www.aws.training/Details/eLearning?id=17887</a></li>
+                    <li><a href="https://www.aws.training/Details/Video?id=24750">https://www.aws.training/Details/Video?id=24750</a></li>
                 </ul>
                 <p>Bitstream Specifications:</p>
                 <ul>
-                    <li>http://www.itu.int/rec/T-REC-H.264-201610-I</li>
-                    <li>http://www.itu.int/ITU-T/recommendations/rec.aspx?rec=12904&amp;lang=en</li>
-                    <li>https://storage.googleapis.com/downloads.webmproject.org/docs/vp9/vp9-bitstream-specification-v0.6-20160331-draft.pdf
-                    </li>
-                    <li>http://iphome.hhi.de/wiegand/assets/pdfs/2012_12_IEEE-HEVC-Overview.pdf</li>
-                    <li>http://phenix.int-evry.fr/jct/doc_end_user/current_document.php?id=7243</li>
-                    <li>http://gentlelogic.blogspot.com.br/2011/11/exploring-h264-part-2-h264-bitstream.html</li>
-                    <li>https://forum.doom9.org/showthread.php?t=167081</li>
-                    <li>https://forum.doom9.org/showthread.php?t=168947</li>
+                    <li><a href="http://www.itu.int/rec/T-REC-H.264-201610-I">http://www.itu.int/rec/T-REC-H.264-201610-I</a></li>
+                    <li><a href="http://www.itu.int/ITU-T/recommendations/rec.aspx?rec=12904&amp;lang=en">http://www.itu.int/ITU-T/recommendations/rec.aspx?rec=12904&amp;lang=en</a></li>
+                    <li><a href="https://storage.googleapis.com/downloads.webmproject.org/docs/vp9/vp9-bitstream-specification-v0.6-20160331-draft.pdf">https://storage.googleapis.com/downloads.webmproject.org/docs/vp9/vp9-bitstream-specification-v0.6-20160331-draft.pdf</a></li>
+                    <li><a href="http://iphome.hhi.de/wiegand/assets/pdfs/2012_12_IEEE-HEVC-Overview.pdf">http://iphome.hhi.de/wiegand/assets/pdfs/2012_12_IEEE-HEVC-Overview.pdf</a></li>
+                    <li><a href="http://phenix.int-evry.fr/jct/doc_end_user/current_document.php?id=7243">http://phenix.int-evry.fr/jct/doc_end_user/current_document.php?id=7243</a></li>
+                    <li><a href="http://gentlelogic.blogspot.com.br/2011/11/exploring-h264-part-2-h264-bitstream.html">http://gentlelogic.blogspot.com.br/2011/11/exploring-h264-part-2-h264-bitstream.html</a></li>
+                    <li><a href="https://forum.doom9.org/showthread.php?t=167081">https://forum.doom9.org/showthread.php?t=167081</a></li>
+                    <li><a href="https://forum.doom9.org/showthread.php?t=168947">https://forum.doom9.org/showthread.php?t=168947</a></li>
                 </ul>
                 <p>Software:</p>
                 <ul>
-                    <li>https://ffmpeg.org/</li>
-                    <li>https://ffmpeg.org/ffmpeg-all.html</li>
-                    <li>https://ffmpeg.org/ffprobe.html</li>
-                    <li>https://mediaarea.net/en/MediaInfo</li>
-                    <li>https://www.jongbel.com/</li>
-                    <li>https://trac.ffmpeg.org/wiki/</li>
-                    <li>https://software.intel.com/en-us/intel-video-pro-analyzer</li>
-                    <li>https://medium.com/@mbebenita/av1-bitstream-analyzer-d25f1c27072b#.d5a89oxz8</li>
+                    <li><a href="https://ffmpeg.org/">https://ffmpeg.org/</a></li>
+                    <li><a href="https://ffmpeg.org/ffmpeg-all.html">https://ffmpeg.org/ffmpeg-all.html</a></li>
+                    <li><a href="https://ffmpeg.org/ffprobe.html">https://ffmpeg.org/ffprobe.html</a></li>
+                    <li><a href="https://mediaarea.net/en/MediaInfo">https://mediaarea.net/en/MediaInfo</a></li>
+                    <li><a href="https://www.jongbel.com/">https://www.jongbel.com/</a></li>
+                    <li><a href="https://trac.ffmpeg.org/wiki/">https://trac.ffmpeg.org/wiki/</a></li>
+                    <li><a href="https://software.intel.com/en-us/intel-video-pro-analyzer">https://software.intel.com/en-us/intel-video-pro-analyzer</a></li>
+                    <li><a href="https://medium.com/@mbebenita/av1-bitstream-analyzer-d25f1c27072b#.d5a89oxz8">https://medium.com/@mbebenita/av1-bitstream-analyzer-d25f1c27072b#.d5a89oxz8</a></li>
                 </ul>
                 <p>Non-ITU Codecs:</p>
                 <ul>
-                    <li>https://aomedia.googlesource.com/</li>
-                    <li>https://github.com/webmproject/libvpx/tree/master/vp9</li>
-                    <li>https://ghostarchive.org/archive/0W0d8 (was:
-                        https://people.xiph.org/~xiphmont/demo/daala/demo1.shtml)</li>
-                    <li>https://people.xiph.org/~jm/daala/revisiting/</li>
-                    <li>https://www.youtube.com/watch?v=lzPaldsmJbk</li>
-                    <li>https://fosdem.org/2017/schedule/event/om_av1/</li>
-                    <li>https://jmvalin.ca/papers/AV1_tools.pdf</li>
+                    <li><a href="https://aomedia.googlesource.com/">https://aomedia.googlesource.com/</a></li>
+                    <li><a href="https://github.com/webmproject/libvpx/tree/master/vp9">https://github.com/webmproject/libvpx/tree/master/vp9</a></li>
+                    <li><a href="https://ghostarchive.org/archive/0W0d8">https://ghostarchive.org/archive/0W0d8</a> (was:
+                        <a href="https://people.xiph.org/~xiphmont/demo/daala/demo1.shtml)">https://people.xiph.org/~xiphmont/demo/daala/demo1.shtml)</a></li>
+                    <li><a href="https://people.xiph.org/~jm/daala/revisiting/">https://people.xiph.org/~jm/daala/revisiting/</a></li>
+                    <li><a href="https://www.youtube.com/watch?v=lzPaldsmJbk">https://www.youtube.com/watch?v=lzPaldsmJbk</a></li>
+                    <li><a href="https://fosdem.org/2017/schedule/event/om_av1/">https://fosdem.org/2017/schedule/event/om_av1/</a></li>
+                    <li><a href="https://jmvalin.ca/papers/AV1_tools.pdf">https://jmvalin.ca/papers/AV1_tools.pdf</a></li>
                 </ul>
                 <p>Encoding Concepts:</p>
                 <ul>
-                    <li>http://x265.org/hevc-h265/</li>
-                    <li>http://slhck.info/video/2017/03/01/rate-control.html</li>
-                    <li>http://slhck.info/video/2017/02/24/vbr-settings.html</li>
-                    <li>http://slhck.info/video/2017/02/24/crf-guide.html</li>
-                    <li>https://arxiv.org/pdf/1702.00817v1.pdf</li>
-                    <li>https://trac.ffmpeg.org/wiki/Debug/MacroblocksAndMotionVectors</li>
-                    <li>http://web.ece.ucdavis.edu/cerl/ReliableJPEG/Cung/jpeg.html</li>
-                    <li>http://www.adobe.com/devnet/adobe-media-server/articles/h264_encoding.html</li>
-                    <li>https://prezi.com/8m7thtvl4ywr/mp3-and-aac-explained/</li>
-                    <li>https://blogs.gnome.org/rbultje/2016/12/13/overview-of-the-vp9-video-codec/</li>
-                    <li>https://videoblerg.wordpress.com/2017/11/10/ffmpeg-and-how-to-use-it-wrong/</li>
+                    <li><a href="http://x265.org/hevc-h265/">http://x265.org/hevc-h265/</a></li>
+                    <li><a href="http://slhck.info/video/2017/03/01/rate-control.html">http://slhck.info/video/2017/03/01/rate-control.html</a></li>
+                    <li><a href="http://slhck.info/video/2017/02/24/vbr-settings.html">http://slhck.info/video/2017/02/24/vbr-settings.html</a></li>
+                    <li><a href="http://slhck.info/video/2017/02/24/crf-guide.html">http://slhck.info/video/2017/02/24/crf-guide.html</a></li>
+                    <li><a href="https://arxiv.org/pdf/1702.00817v1.pdf">https://arxiv.org/pdf/1702.00817v1.pdf</a></li>
+                    <li><a href="https://trac.ffmpeg.org/wiki/Debug/MacroblocksAndMotionVectors">https://trac.ffmpeg.org/wiki/Debug/MacroblocksAndMotionVectors</a></li>
+                    <li><a href="http://web.ece.ucdavis.edu/cerl/ReliableJPEG/Cung/jpeg.html">http://web.ece.ucdavis.edu/cerl/ReliableJPEG/Cung/jpeg.html</a></li>
+                    <li><a href="http://www.adobe.com/devnet/adobe-media-server/articles/h264_encoding.html">http://www.adobe.com/devnet/adobe-media-server/articles/h264_encoding.html</a></li>
+                    <li><a href="https://prezi.com/8m7thtvl4ywr/mp3-and-aac-explained/">https://prezi.com/8m7thtvl4ywr/mp3-and-aac-explained/</a></li>
+                    <li><a href="https://blogs.gnome.org/rbultje/2016/12/13/overview-of-the-vp9-video-codec/">https://blogs.gnome.org/rbultje/2016/12/13/overview-of-the-vp9-video-codec/</a></li>
+                    <li><a href="https://videoblerg.wordpress.com/2017/11/10/ffmpeg-and-how-to-use-it-wrong/">https://videoblerg.wordpress.com/2017/11/10/ffmpeg-and-how-to-use-it-wrong/</a></li>
                 </ul>
                 <p>Video Sequences for Testing:</p>
                 <ul>
-                    <li>http://bbb3d.renderfarming.net/download.html</li>
-                    <li>https://www.its.bldrdoc.gov/vqeg/video-datasets-and-organizations.aspx</li>
+                    <li><a href="http://bbb3d.renderfarming.net/download.html">http://bbb3d.renderfarming.net/download.html</a></li>
+                    <li><a href="https://www.its.bldrdoc.gov/vqeg/video-datasets-and-organizations.aspx">https://www.its.bldrdoc.gov/vqeg/video-datasets-and-organizations.aspx</a></li>
                 </ul>
                 <p>Miscellaneous:</p>
                 <ul>
-                    <li>https://github.com/Eyevinn/streaming-onboarding</li>
-                    <li>http://stackoverflow.com/a/24890903</li>
-                    <li>http://stackoverflow.com/questions/38094302/how-to-understand-header-of-h264</li>
-                    <li>http://techblog.netflix.com/2016/08/a-large-scale-comparison-of-x264-x265.html</li>
-                    <li>http://vanseodesign.com/web-design/color-luminance/</li>
-                    <li>http://www.biologymad.com/nervoussystem/eyenotes.htm</li>
-                    <li>http://www.compression.ru/video/codec_comparison/h264_2012/mpeg4_avc_h264_video_codecs_comparison.pdf
-                    </li>
-                    <li>https://web.archive.org/web/20100728070421/http://www.csc.villanova.edu/~rschumey/csc4800/dct.html
-                        (was: http://www.csc.villanova.edu/~rschumey/csc4800/dct.html)</li>
-                    <li>http://www.explainthatstuff.com/digitalcameras.html</li>
-                    <li>http://www.hkvstar.com</li>
-                    <li>http://www.hometheatersound.com/</li>
-                    <li>http://www.lighterra.com/papers/videoencodingh264/</li>
-                    <li>http://www.red.com/learn/red-101/video-chroma-subsampling</li>
-                    <li>http://www.slideshare.net/ManoharKuse/hevc-intra-coding</li>
-                    <li>http://www.slideshare.net/mwalendo/h264vs-hevc</li>
-                    <li>http://www.slideshare.net/rvarun7777/final-seminar-46117193</li>
-                    <li>http://www.springer.com/cda/content/document/cda_downloaddocument/9783642147029-c1.pdf</li>
-                    <li>http://www.streamingmedia.com/Articles/Editorial/Featured-Articles/A-Progress-Report-The-Alliance-for-Open-Media-and-the-AV1-Codec-110383.aspx
-                    </li>
-                    <li>http://www.streamingmediaglobal.com/Articles/ReadArticle.aspx?ArticleID=116505&amp;PageNum=1
-                    </li>
-                    <li>http://yumichan.net/video-processing/video-compression/introduction-to-h264-nal-unit/</li>
-                    <li>https://cardinalpeak.com/blog/the-h-264-sequence-parameter-set/</li>
-                    <li>https://cardinalpeak.com/blog/worlds-smallest-h-264-encoder/</li>
-                    <li>https://codesequoia.wordpress.com/category/video/</li>
-                    <li>https://developer.apple.com/library/content/technotes/tn2224/_index.html</li>
-                    <li>https://en.wikibooks.org/wiki/MeGUI/x264_Settings</li>
-                    <li>https://en.wikipedia.org/wiki/Adaptive_bitrate_streaming</li>
-                    <li>https://en.wikipedia.org/wiki/AOMedia_Video_1</li>
-                    <li>https://en.wikipedia.org/wiki/Chroma_subsampling#/media/File:Colorcomp.jpg</li>
-                    <li>https://en.wikipedia.org/wiki/Cone_cell</li>
-                    <li>https://en.wikipedia.org/wiki/File:H.264_block_diagram_with_quality_score.jpg</li>
-                    <li>https://en.wikipedia.org/wiki/Inter_frame</li>
-                    <li>https://en.wikipedia.org/wiki/Intra-frame_coding</li>
-                    <li>https://en.wikipedia.org/wiki/Photoreceptor_cell</li>
-                    <li>https://en.wikipedia.org/wiki/Pixel_aspect_ratio</li>
-                    <li>https://en.wikipedia.org/wiki/Presentation_timestamp</li>
-                    <li>https://en.wikipedia.org/wiki/Rod_cell</li>
-                    <li>https://it.wikipedia.org/wiki/File:Pixel_geometry_01_Pengo.jpg</li>
-                    <li>https://leandromoreira.com.br/2016/10/09/how-to-measure-video-quality-perception/</li>
-                    <li>https://sites.google.com/site/linuxencoding/x264-ffmpeg-mapping</li>
-                    <li>https://softwaredevelopmentperestroika.wordpress.com/2014/02/11/image-processing-with-python-numpy-scipy-image-convolution/
-                    </li>
-                    <li>https://tools.ietf.org/html/draft-fuldseth-netvc-thor-03</li>
-                    <li>https://www.encoding.com/android/</li>
-                    <li>https://www.encoding.com/http-live-streaming-hls/</li>
-                    <li>https://web.archive.org/web/20150129171151/https://www.iem.thm.de/telekom-labor/zinke/mk/mpeg2beg/whatisit.htm
-                    </li>
-                    <li>https://www.lifewire.com/cmos-image-sensor-493271</li>
-                    <li>https://www.linkedin.com/pulse/brief-history-video-codecs-yoav-nativ</li>
-                    <li>https://www.linkedin.com/pulse/video-streaming-methodology-reema-majumdar</li>
-                    <li>https://www.vcodex.com/h264avc-intra-precition/</li>
-                    <li>https://www.youtube.com/watch?v=9vgtJJ2wwMA</li>
-                    <li>https://www.youtube.com/watch?v=LFXN9PiOGtY</li>
-                    <li>https://www.youtube.com/watch?v=Lto-ajuqW3w&amp;list=PLzH6n4zXuckpKAj1_88VS-8Z6yn9zX_P6</li>
-                    <li>https://www.youtube.com/watch?v=LWxu4rkZBLw</li>
-                    <li>https://web.stanford.edu/class/ee398a/handouts/lectures/EE398a_MotionEstimation_2012.pdf</li>
-                    <li>https://sander.saares.eu/categories/drm-is-not-a-black-box/</li>
+                    <li><a href="https://github.com/Eyevinn/streaming-onboarding">https://github.com/Eyevinn/streaming-onboarding</a></li>
+                    <li><a href="http://stackoverflow.com/a/24890903">http://stackoverflow.com/a/24890903</a></li>
+                    <li><a href="http://stackoverflow.com/questions/38094302/how-to-understand-header-of-h264">http://stackoverflow.com/questions/38094302/how-to-understand-header-of-h264</a></li>
+                    <li><a href="http://techblog.netflix.com/2016/08/a-large-scale-comparison-of-x264-x265.html">http://techblog.netflix.com/2016/08/a-large-scale-comparison-of-x264-x265.html</a></li>
+                    <li><a href="http://vanseodesign.com/web-design/color-luminance/">http://vanseodesign.com/web-design/color-luminance/</a></li>
+                    <li><a href="http://www.biologymad.com/nervoussystem/eyenotes.htm">http://www.biologymad.com/nervoussystem/eyenotes.htm</a></li>
+                    <li><a href="http://www.compression.ru/video/codec_comparison/h264_2012/mpeg4_avc_h264_video_codecs_comparison.pdf">http://www.compression.ru/video/codec_comparison/h264_2012/mpeg4_avc_h264_video_codecs_comparison.pdf</a></li>
+                    <li><a href="https://web.archive.org/web/20100728070421/http://www.csc.villanova.edu/~rschumey/csc4800/dct.html">https://web.archive.org/web/20100728070421/http://www.csc.villanova.edu/~rschumey/csc4800/dct.html</a>
+                        (was: <a href="http://www.csc.villanova.edu/~rschumey/csc4800/dct.html)">http://www.csc.villanova.edu/~rschumey/csc4800/dct.html)</a></li>
+                    <li><a href="http://www.explainthatstuff.com/digitalcameras.html">http://www.explainthatstuff.com/digitalcameras.html</a></li>
+                    <li><a href="http://www.hkvstar.com">http://www.hkvstar.com</a></li>
+                    <li><a href="http://www.hometheatersound.com/">http://www.hometheatersound.com/</a></li>
+                    <li><a href="http://www.lighterra.com/papers/videoencodingh264/">http://www.lighterra.com/papers/videoencodingh264/</a></li>
+                    <li><a href="http://www.red.com/learn/red-101/video-chroma-subsampling">http://www.red.com/learn/red-101/video-chroma-subsampling</a></li>
+                    <li><a href="http://www.slideshare.net/ManoharKuse/hevc-intra-coding">http://www.slideshare.net/ManoharKuse/hevc-intra-coding</a></li>
+                    <li><a href="http://www.slideshare.net/mwalendo/h264vs-hevc">http://www.slideshare.net/mwalendo/h264vs-hevc</a></li>
+                    <li><a href="http://www.slideshare.net/rvarun7777/final-seminar-46117193">http://www.slideshare.net/rvarun7777/final-seminar-46117193</a></li>
+                    <li><a href="http://www.springer.com/cda/content/document/cda_downloaddocument/9783642147029-c1.pdf">http://www.springer.com/cda/content/document/cda_downloaddocument/9783642147029-c1.pdf</a></li>
+                    <li><a href="http://www.streamingmedia.com/Articles/Editorial/Featured-Articles/A-Progress-Report-The-Alliance-for-Open-Media-and-the-AV1-Codec-110383.aspx">http://www.streamingmedia.com/Articles/Editorial/Featured-Articles/A-Progress-Report-The-Alliance-for-Open-Media-and-the-AV1-Codec-110383.aspx</a></li>
+                    <li><a href="http://www.streamingmediaglobal.com/Articles/ReadArticle.aspx?ArticleID=116505&amp;PageNum=1">http://www.streamingmediaglobal.com/Articles/ReadArticle.aspx?ArticleID=116505&amp;PageNum=1</a></li>
+                    <li><a href="http://yumichan.net/video-processing/video-compression/introduction-to-h264-nal-unit/">http://yumichan.net/video-processing/video-compression/introduction-to-h264-nal-unit/</a></li>
+                    <li><a href="https://cardinalpeak.com/blog/the-h-264-sequence-parameter-set/">https://cardinalpeak.com/blog/the-h-264-sequence-parameter-set/</a></li>
+                    <li><a href="https://cardinalpeak.com/blog/worlds-smallest-h-264-encoder/">https://cardinalpeak.com/blog/worlds-smallest-h-264-encoder/</a></li>
+                    <li><a href="https://codesequoia.wordpress.com/category/video/">https://codesequoia.wordpress.com/category/video/</a></li>
+                    <li><a href="https://developer.apple.com/library/content/technotes/tn2224/_index.html">https://developer.apple.com/library/content/technotes/tn2224/_index.html</a></li>
+                    <li><a href="https://en.wikibooks.org/wiki/MeGUI/x264_Settings">https://en.wikibooks.org/wiki/MeGUI/x264_Settings</a></li>
+                    <li><a href="https://en.wikipedia.org/wiki/Adaptive_bitrate_streaming">https://en.wikipedia.org/wiki/Adaptive_bitrate_streaming</a></li>
+                    <li><a href="https://en.wikipedia.org/wiki/AOMedia_Video_1">https://en.wikipedia.org/wiki/AOMedia_Video_1</a></li>
+                    <li><a href="https://en.wikipedia.org/wiki/Chroma_subsampling#/media/File:Colorcomp.jpg">https://en.wikipedia.org/wiki/Chroma_subsampling#/media/File:Colorcomp.jpg</a></li>
+                    <li><a href="https://en.wikipedia.org/wiki/Cone_cell">https://en.wikipedia.org/wiki/Cone_cell</a></li>
+                    <li><a href="https://en.wikipedia.org/wiki/File:H.264_block_diagram_with_quality_score.jpg">https://en.wikipedia.org/wiki/File:H.264_block_diagram_with_quality_score.jpg</a></li>
+                    <li><a href="https://en.wikipedia.org/wiki/Inter_frame">https://en.wikipedia.org/wiki/Inter_frame</a></li>
+                    <li><a href="https://en.wikipedia.org/wiki/Intra-frame_coding">https://en.wikipedia.org/wiki/Intra-frame_coding</a></li>
+                    <li><a href="https://en.wikipedia.org/wiki/Photoreceptor_cell">https://en.wikipedia.org/wiki/Photoreceptor_cell</a></li>
+                    <li><a href="https://en.wikipedia.org/wiki/Pixel_aspect_ratio">https://en.wikipedia.org/wiki/Pixel_aspect_ratio</a></li>
+                    <li><a href="https://en.wikipedia.org/wiki/Presentation_timestamp">https://en.wikipedia.org/wiki/Presentation_timestamp</a></li>
+                    <li><a href="https://en.wikipedia.org/wiki/Rod_cell">https://en.wikipedia.org/wiki/Rod_cell</a></li>
+                    <li><a href="https://it.wikipedia.org/wiki/File:Pixel_geometry_01_Pengo.jpg">https://it.wikipedia.org/wiki/File:Pixel_geometry_01_Pengo.jpg</a></li>
+                    <li><a href="https://leandromoreira.com.br/2016/10/09/how-to-measure-video-quality-perception/">https://leandromoreira.com.br/2016/10/09/how-to-measure-video-quality-perception/</a></li>
+                    <li><a href="https://sites.google.com/site/linuxencoding/x264-ffmpeg-mapping">https://sites.google.com/site/linuxencoding/x264-ffmpeg-mapping</a></li>
+                    <li><a href="https://softwaredevelopmentperestroika.wordpress.com/2014/02/11/image-processing-with-python-numpy-scipy-image-convolution/">https://softwaredevelopmentperestroika.wordpress.com/2014/02/11/image-processing-with-python-numpy-scipy-image-convolution/</a></li>
+                    <li><a href="https://tools.ietf.org/html/draft-fuldseth-netvc-thor-03">https://tools.ietf.org/html/draft-fuldseth-netvc-thor-03</a></li>
+                    <li><a href="https://www.encoding.com/android/">https://www.encoding.com/android/</a></li>
+                    <li><a href="https://www.encoding.com/http-live-streaming-hls/">https://www.encoding.com/http-live-streaming-hls/</a></li>
+                    <li><a href="https://web.archive.org/web/20150129171151/https://www.iem.thm.de/telekom-labor/zinke/mk/mpeg2beg/whatisit.htm">https://web.archive.org/web/20150129171151/https://www.iem.thm.de/telekom-labor/zinke/mk/mpeg2beg/whatisit.htm</a></li>
+                    <li><a href="https://www.lifewire.com/cmos-image-sensor-493271">https://www.lifewire.com/cmos-image-sensor-493271</a></li>
+                    <li><a href="https://www.linkedin.com/pulse/brief-history-video-codecs-yoav-nativ">https://www.linkedin.com/pulse/brief-history-video-codecs-yoav-nativ</a></li>
+                    <li><a href="https://www.linkedin.com/pulse/video-streaming-methodology-reema-majumdar">https://www.linkedin.com/pulse/video-streaming-methodology-reema-majumdar</a></li>
+                    <li><a href="https://www.vcodex.com/h264avc-intra-precition/">https://www.vcodex.com/h264avc-intra-precition/</a></li>
+                    <li><a href="https://www.youtube.com/watch?v=9vgtJJ2wwMA">https://www.youtube.com/watch?v=9vgtJJ2wwMA</a></li>
+                    <li><a href="https://www.youtube.com/watch?v=LFXN9PiOGtY">https://www.youtube.com/watch?v=LFXN9PiOGtY</a></li>
+                    <li><a href="https://www.youtube.com/watch?v=Lto-ajuqW3w&amp;list=PLzH6n4zXuckpKAj1_88VS-8Z6yn9zX_P6">https://www.youtube.com/watch?v=Lto-ajuqW3w&amp;list=PLzH6n4zXuckpKAj1_88VS-8Z6yn9zX_P6</a></li>
+                    <li><a href="https://www.youtube.com/watch?v=LWxu4rkZBLw">https://www.youtube.com/watch?v=LWxu4rkZBLw</a></li>
+                    <li><a href="https://web.stanford.edu/class/ee398a/handouts/lectures/EE398a_MotionEstimation_2012.pdf">https://web.stanford.edu/class/ee398a/handouts/lectures/EE398a_MotionEstimation_2012.pdf</a></li>
+                    <li><a href="https://sander.saares.eu/categories/drm-is-not-a-black-box/">https://sander.saares.eu/categories/drm-is-not-a-black-box/</a></li>
                 </ul>
             </div>
         </div>
