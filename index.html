@@ -1,0 +1,1119 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Video Introduction</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700&display=swap');
+        
+        :root {
+            --swiss-red: #FF3300;
+            --grid-color: #e5e5e5;
+        }
+
+        body {
+            font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif;
+            background-color: #ffffff;
+            color: #000000;
+            line-height: 1.4;
+        }
+
+        /* Swiss Typography Utilities */
+        .type-huge {
+            font-size: clamp(3rem, 8vw, 8rem);
+            font-weight: 700;
+            letter-spacing: -0.04em;
+            line-height: 0.9;
+        }
+        
+        .type-display {
+            font-size: clamp(2rem, 4vw, 4rem);
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            line-height: 1;
+        }
+
+        .type-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            font-weight: 600;
+        }
+
+        /* Layout Grid */
+        .swiss-container {
+            border-left: 1px solid var(--grid-color);
+            border-right: 1px solid var(--grid-color);
+        }
+        
+        .swiss-border-b {
+            border-bottom: 1px solid var(--grid-color);
+        }
+        
+        .swiss-border-t {
+            border-top: 1px solid var(--grid-color);
+        }
+        
+        .swiss-border-r {
+            border-right: 1px solid var(--grid-color);
+        }
+
+        /* Components */
+        .btn-swiss {
+            background: transparent;
+            border: 1px solid black;
+            color: black;
+            padding: 1rem 2rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            letter-spacing: 0.05em;
+            transition: all 0.2s;
+            border-radius: 0;
+        }
+        
+        .btn-swiss:hover {
+            background: black;
+            color: white;
+        }
+        
+        .btn-swiss-accent {
+            background: var(--swiss-red);
+            border: 1px solid var(--swiss-red);
+            color: white;
+        }
+        .btn-swiss-accent:hover {
+            background: white;
+            color: var(--swiss-red);
+        }
+
+        /* Animations */
+
+        
+        /* Grid Background Pattern */
+        .bg-grid-lines {
+            background-size: 40px 40px;
+            background-image:
+                linear-gradient(to right, #f0f0f0 1px, transparent 1px),
+                linear-gradient(to bottom, #f0f0f0 1px, transparent 1px);
+        }
+    
+        
+        /* Additional Styles for Markdown Content */
+        .markdown-content h2 {
+            font-size: clamp(1.5rem, 3vw, 2.5rem);
+            font-weight: 700;
+            margin-top: 3rem;
+            margin-bottom: 1.5rem;
+            letter-spacing: -0.02em;
+            line-height: 1;
+        }
+        .markdown-content h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        .markdown-content p {
+            margin-bottom: 1.5rem;
+            font-size: 1.125rem;
+            color: #333;
+        }
+        .markdown-content ul {
+            list-style-type: disc;
+            padding-left: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        .markdown-content li {
+            margin-bottom: 0.5rem;
+        }
+        .markdown-content img {
+            max-width: 100%;
+            height: auto;
+            margin: 2rem 0;
+            border: 1px solid #e5e5e5;
+        }
+        .markdown-content blockquote {
+            border-left: 4px solid var(--swiss-red);
+            padding-left: 1.5rem;
+            font-style: italic;
+            margin: 2rem 0;
+            background: #f9f9f9;
+            padding: 1.5rem;
+        }
+        .markdown-content pre {
+            background: #f4f4f4;
+            padding: 1.5rem;
+            overflow-x: auto;
+            margin: 2rem 0;
+            font-family: monospace;
+            font-size: 0.9rem;
+        }
+        .markdown-content code {
+            background: #f4f4f4;
+            padding: 0.2rem 0.4rem;
+            font-family: monospace;
+            font-size: 0.9rem;
+        }
+        .markdown-content table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 2rem 0;
+        }
+        .markdown-content th, .markdown-content td {
+            border: 1px solid #e5e5e5;
+            padding: 0.75rem;
+            text-align: left;
+        }
+        .markdown-content th {
+            background: #f4f4f4;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body class="selection:bg-black selection:text-white overflow-x-hidden">
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 bg-white/90 backdrop-blur-sm border-b border-gray-200">
+        <div class="max-w-7xl mx-auto flex justify-between items-stretch h-16 swiss-container">
+            <div class="flex items-center px-6 border-r border-gray-200">
+                <span class="font-bold tracking-tight text-lg">DIGITAL VIDEO INTRO</span>
+            </div>
+            <div class="hidden md:flex flex-1 justify-end items-center overflow-x-auto">
+<a href="#intro" class="h-full flex items-center px-6 text-xs font-medium hover:bg-black hover:text-white transition-colors border-l border-gray-200 whitespace-nowrap">INTRO</a>
+<a href="#changelog" class="h-full flex items-center px-6 text-xs font-medium hover:bg-black hover:text-white transition-colors border-l border-gray-200 whitespace-nowrap">CHANGELOG</a>
+<a href="#basic-terminology" class="h-full flex items-center px-6 text-xs font-medium hover:bg-black hover:text-white transition-colors border-l border-gray-200 whitespace-nowrap">BASIC TERMINOLOGY</a>
+<a href="#redundancy-removal" class="h-full flex items-center px-6 text-xs font-medium hover:bg-black hover:text-white transition-colors border-l border-gray-200 whitespace-nowrap">REDUNDANCY REMOVAL</a>
+<a href="#how-does-a-video-codec-work" class="h-full flex items-center px-6 text-xs font-medium hover:bg-black hover:text-white transition-colors border-l border-gray-200 whitespace-nowrap">HOW DOES A VIDEO CODEC WORK?</a>
+<a href="#online-streaming" class="h-full flex items-center px-6 text-xs font-medium hover:bg-black hover:text-white transition-colors border-l border-gray-200 whitespace-nowrap">ONLINE STREAMING</a>
+<a href="#how-to-use-jupyter" class="h-full flex items-center px-6 text-xs font-medium hover:bg-black hover:text-white transition-colors border-l border-gray-200 whitespace-nowrap">HOW TO USE JUPYTER</a>
+<a href="#conferences" class="h-full flex items-center px-6 text-xs font-medium hover:bg-black hover:text-white transition-colors border-l border-gray-200 whitespace-nowrap">CONFERENCES</a>
+<a href="#references" class="h-full flex items-center px-6 text-xs font-medium hover:bg-black hover:text-white transition-colors border-l border-gray-200 whitespace-nowrap">REFERENCES</a>
+
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section (Intro) -->
+    <header class="min-h-[80vh] pt-16 flex flex-col relative bg-white">
+        <!-- Grid Background -->
+        <div class="absolute inset-0 bg-grid-lines -z-10"></div>
+        
+        <div class="max-w-7xl mx-auto w-full flex-1 flex flex-col justify-center px-6 md:px-12 swiss-container">
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-8 mb-12">
+                <div class="md:col-span-8">
+                    <span class="type-label text-[var(--swiss-red)] mb-4 block">• Technical Guide</span>
+                    <h1 class="type-huge">
+                        DIGITAL VIDEO<br>
+                        INTRODUCTION.
+                    </h1>
+                </div>
+                <div class="md:col-span-4 flex flex-col justify-end pb-4">
+                    <p class="text-xl leading-relaxed mb-8 font-light">
+                        A gentle introduction to video technology for software developers and engineers.
+                    </p>
+                    <div>
+                        <a href="#basic-terminology" class="btn-swiss inline-flex items-center">
+                            Start Reading <i data-lucide="arrow-down" class="ml-2 w-4 h-4"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section id="intro" class="py-24 bg-white swiss-border-b">
+        <div class="max-w-7xl mx-auto px-6 md:px-12 swiss-container">
+            <span class="type-label mb-6 block text-[var(--swiss-red)]">Section</span>
+            <h2 class="type-display mb-12">Intro</h2>
+            
+            <div class="markdown-content max-w-4xl">
+                
+<p>A gentle introduction to video technology, although it's aimed at software developers / engineers, we want to make it easy <strong>for anyone to learn</strong>. This idea was born during a <a href="https://docs.google.com/presentation/d/17Z31kEkl_NGJ0M66reqr9_uTG6tI5EDDVXpdPKVuIrs/edit#slide=id.p">mini workshop for newcomers to video technology</a>.</p>
+<p>The goal is to introduce some digital video concepts with a <strong>simple vocabulary, lots of visual elements and practical examples</strong> when possible, and make this knowledge available everywhere. Please, feel free to send corrections, suggestions and improve it.</p>
+<p>There will be <strong>hands-on</strong> sections which require you to have <strong>docker installed</strong> and this repository cloned.</p>
+<pre><code class="language-bash">git clone https://github.com/leandromoreira/digital_video_introduction.git
+cd digital_video_introduction
+./setup.sh
+</code></pre>
+<blockquote>
+<p><strong>WARNING</strong>: when you see a <code>./s/ffmpeg</code> or <code>./s/mediainfo</code> command, it means we're running a <strong>containerized version</strong> of that program, which already includes all the needed requirements.</p>
+</blockquote>
+<p>All the <strong>hands-on should be performed from the folder you cloned</strong> this repository. For the <strong>jupyter examples</strong> you must start the server <code>./s/start_jupyter.sh</code> and copy the URL and use it in your browser.</p>
+
+            </div>
+        </div>
+    </section>
+    
+    <section id="changelog" class="py-24 bg-white swiss-border-b">
+        <div class="max-w-7xl mx-auto px-6 md:px-12 swiss-container fade-up">
+            <span class="type-label mb-6 block text-[var(--swiss-red)]">Section</span>
+            <h2 class="type-display mb-12">Changelog</h2>
+            
+            <div class="markdown-content max-w-4xl">
+                
+<ul>
+<li>added DRM system</li>
+<li>released version 1.0.0</li>
+<li>added simplified Chinese translation</li>
+<li>added FFmpeg oscilloscope filter example</li>
+<li>added Brazilian Portuguese translation</li>
+<li>added Spanish translation</li>
+</ul>
+
+            </div>
+        </div>
+    </section>
+    
+    <section id="basic-terminology" class="py-24 bg-white swiss-border-b">
+        <div class="max-w-7xl mx-auto px-6 md:px-12 swiss-container fade-up">
+            <span class="type-label mb-6 block text-[var(--swiss-red)]">Section</span>
+            <h2 class="type-display mb-12">Basic terminology</h2>
+            
+            <div class="markdown-content max-w-4xl">
+                
+<p>An <strong>image</strong> can be thought of as a <strong>2D matrix</strong>. If we think about <strong>colors</strong>, we can extrapolate this idea seeing this image as a <strong>3D matrix</strong> where the <strong>additional dimensions</strong> are used to provide <strong>color data</strong>.</p>
+<p>If we chose to represent these colors using the <a href="https://en.wikipedia.org/wiki/Primary_color">primary colors (red, green and blue)</a>, we define three planes: the first one for <strong>red</strong>, the second for <strong>green</strong>, and the last one for the <strong>blue</strong> color.</p>
+<p><img alt="an image is a 3d matrix RGB" src="References/digital_video_introduction/i/image_3d_matrix_rgb.png" title="An image is a 3D matrix" /></p>
+<p>We'll call each point in this matrix <strong>a pixel</strong> (picture element). One pixel represents the <strong>intensity</strong> (usually a numeric value) of a given color. For example, a <strong>red pixel</strong> means 0 of green, 0 of blue and maximum of red. The <strong>pink color pixel</strong> can be formed with a combination of the three colors. Using a representative numeric range from 0 to 255, the pink pixel is defined by <strong>Red=255, Green=192 and Blue=203</strong>.</p>
+<blockquote>
+<h4>Other ways to encode a color image</h4>
+<p>Many other possible models may be used to represent the colors that make up an image. We could, for instance, use an indexed palette where we'd only need a single byte to represent each pixel instead of the 3 needed when using the RGB model. In such a model we could use a 2D matrix instead of a 3D matrix to represent our color, this would save on memory but yield fewer color options.</p>
+<p><img alt="NES palette" src="References/digital_video_introduction/i/nes-color-palette.png" title="NES palette" /></p>
+</blockquote>
+<p>For instance, look at the picture down below. The first face is fully colored. The others are the red, green, and blue planes (shown as gray tones).</p>
+<p><img alt="RGB channels intensity" src="References/digital_video_introduction/i/rgb_channels_intensity.png" title="RGB channels intensity" /></p>
+<p>We can see that the <strong>red color</strong> will be the one that <strong>contributes more</strong> (the brightest parts in the second face) to the final color while the <strong>blue color</strong> contribution can be mostly <strong>only seen in Mario's eyes</strong> (last face) and part of his clothes, see how <strong>all planes contribute less</strong> (darkest parts) to the <strong>Mario's mustache</strong>.</p>
+<p>And each color intensity requires a certain amount of bits, this quantity is known as <strong>bit depth</strong>. Let's say we spend <strong>8 bits</strong> (accepting values from 0 to 255) per color (plane), therefore we have a <strong>color depth</strong> of <strong>24 bits</strong> (8 bits * 3 planes R/G/B), and we can also infer that we could use 2 to the power of 24 different colors.</p>
+<blockquote>
+<p><strong>It's great</strong> to learn <a href="http://www.cambridgeincolour.com/tutorials/camera-sensors.htm">how an image is captured from the world to the bits</a>.</p>
+</blockquote>
+<p>Another property of an image is the <strong>resolution</strong>, which is the number of pixels in one dimension. It is often presented as width × height, for example, the <strong>4×4</strong> image below.</p>
+<p><img alt="image resolution" src="References/digital_video_introduction/i/resolution.png" title="image resolution" /></p>
+<blockquote>
+<h4>Hands-on: play around with image and color</h4>
+<p>You can <a href="/image_as_3d_array.ipynb">play around with image and colors</a> using <a href="#how-to-use-jupyter">jupyter</a> (python, numpy, matplotlib and etc).</p>
+<p>You can also learn <a href="/filters_are_easy.ipynb">how image filters (edge detection, sharpen, blur...) work</a>.</p>
+</blockquote>
+<p>Another property we can see while working with images or video is the <strong>aspect ratio</strong> which simply describes the proportional relationship between width and height of an image or pixel.</p>
+<p>When people says this movie or picture is <strong>16x9</strong> they usually are referring to the <strong>Display Aspect Ratio (DAR)</strong>, however we also can have different shapes of individual pixels, we call this <strong>Pixel Aspect Ratio (PAR)</strong>.</p>
+<p><img alt="display aspect ratio" src="References/digital_video_introduction/i/DAR.png" title="display aspect ratio" /></p>
+<p><img alt="pixel aspect ratio" src="References/digital_video_introduction/i/PAR.png" title="pixel aspect ratio" /></p>
+<blockquote>
+<h4>DVD is DAR 4:3</h4>
+<p>Although the real resolution of a DVD is 704x480 it still keeps a 4:3 aspect ratio because it has a PAR of 10:11 (704x10/480x11)</p>
+</blockquote>
+<p>Finally, we can define a <strong>video</strong> as a <strong>succession of <em>n</em> frames</strong> in <strong>time</strong> which can be seen as another dimension, <em>n</em> is the frame rate or frames per second (FPS).</p>
+<p><img alt="video" src="References/digital_video_introduction/i/video.png" title="video" /></p>
+<p>The number of bits per second needed to show a video is its <strong>bit rate</strong>.</p>
+<blockquote>
+<p>bit rate = width * height * bit depth * frames per second</p>
+</blockquote>
+<p>For example, a video with 30 frames per second, 24 bits per pixel, resolution of 480x240 will need <strong>82,944,000 bits per second</strong> or 82.944 Mbps (30x480x240x24) if we don't employ any kind of compression.</p>
+<p>When the <strong>bit rate</strong> is nearly constant it's called constant bit rate (<strong>CBR</strong>) but it also can vary then called variable bit rate (<strong>VBR</strong>).</p>
+<blockquote>
+<p>This graph shows a constrained VBR which doesn't spend too many bits while the frame is black.</p>
+<p><img alt="constrained vbr" src="References/digital_video_introduction/i/vbr.png" title="constrained vbr" /></p>
+</blockquote>
+<p>In the early days, engineers came up with a technique for doubling the perceived frame rate of a video display <strong>without consuming extra bandwidth</strong>. This technique is known as <strong>interlaced video</strong>; it basically sends half of the screen in 1 "frame" and the other half in the next "frame".</p>
+<p>Today screens render mostly using <strong>progressive scan technique</strong>. Progressive is a way of displaying, storing, or transmitting moving images in which all the lines of each frame are drawn in sequence.</p>
+<p><img alt="interlaced vs progressive" src="References/digital_video_introduction/i/interlaced_vs_progressive.png" title="interlaced vs progressive" /></p>
+<p>Now we have an idea about how an <strong>image</strong> is represented digitally, how its <strong>colors</strong> are arranged, how many <strong>bits per second</strong> do we spend to show a video, if it's constant (CBR)  or variable (VBR), with a given <strong>resolution</strong> using a given <strong>frame rate</strong> and many other terms such as interlaced, PAR and others.</p>
+<blockquote>
+<h4>Hands-on: Check video properties</h4>
+<p>You can <a href="https://github.com/leandromoreira/introduction_video_technology/blob/master/encoding_pratical_examples.md#inspect-stream">check most of the  explained properties with ffmpeg or mediainfo.</a></p>
+</blockquote>
+
+            </div>
+        </div>
+    </section>
+    
+    <section id="redundancy-removal" class="py-24 bg-white swiss-border-b">
+        <div class="max-w-7xl mx-auto px-6 md:px-12 swiss-container fade-up">
+            <span class="type-label mb-6 block text-[var(--swiss-red)]">Section</span>
+            <h2 class="type-display mb-12">Redundancy removal</h2>
+            
+            <div class="markdown-content max-w-4xl">
+                
+<p>We learned that it's not feasible to use video without any compression; <strong>a single one hour video</strong> at 720p resolution with 30fps would <strong>require 278GB<sup>*</sup></strong>. Since <strong>using solely lossless data compression algorithms</strong> like DEFLATE (used in PKZIP, Gzip, and PNG), <strong>won't</strong> decrease the required bandwidth sufficiently we need to find other ways to compress the video.</p>
+<blockquote>
+<p><sup>*</sup> We found this number by multiplying 1280 x 720 x 24 x 30 x 3600 (width, height, bits per pixel, fps and time in seconds)</p>
+</blockquote>
+<p>In order to do this, we can <strong>exploit how our vision works</strong>. We're better at distinguishing brightness than colors, the <strong>repetitions in time</strong>, a video contains a lot of images with few changes, and the <strong>repetitions within the image</strong>, each frame also contains many areas using the same or similar color.</p>
+<h2>Colors, Luminance and our eyes</h2>
+<p>Our eyes are <a href="http://vanseodesign.com/web-design/color-luminance/">more sensitive to brightness than colors</a>, you can test it for yourself, look at this picture.</p>
+<p><img alt="luminance vs color" src="References/digital_video_introduction/i/luminance_vs_color.png" title="luminance vs color" /></p>
+<p>If you are unable to see that the colors of the <strong>squares A and B are identical</strong> on the left side, that's fine, it's our brain playing tricks on us to <strong>pay more attention to light and dark than color</strong>. There is a connector, with the same color, on the right side so we (our brain) can easily spot that in fact, they're the same color.</p>
+<blockquote>
+<p><strong>Simplistic explanation of how our eyes work</strong>
+The <a href="http://www.biologymad.com/nervoussystem/eyenotes.htm">eye is a complex organ</a>, it is composed of many parts but we are mostly interested in the cones and rods cells. The eye <a href="https://en.wikipedia.org/wiki/Photoreceptor_cell">contains about 120 million rod cells and 6 million cone cells</a>.</p>
+<p>To <strong>oversimplify</strong>, let's try to put colors and brightness in the eye's parts function. The <strong><a href="https://en.wikipedia.org/wiki/Rod_cell">rod cells</a> are mostly responsible for brightness</strong> while the <strong><a href="https://en.wikipedia.org/wiki/Cone_cell">cone cells</a> are responsible for color</strong>, there are three types of cones, each with different pigment, namely: <a href="https://upload.wikimedia.org/wikipedia/commons/1/1e/Cones_SMJ2_E.svg">S-cones (Blue), M-cones (Green) and L-cones (Red)</a>.</p>
+<p>Since we have many more rod cells (brightness) than cone cells (color), one can infer that we are more capable of distinguishing dark and light than colors.</p>
+<p><img alt="eyes composition" src="References/digital_video_introduction/i/eyes.jpg" title="eyes composition" /></p>
+<p><strong>Contrast sensitivity functions</strong></p>
+<p>Researchers of experimental psychology and many other fields have developed many theories on human vision. And one of them is called Contrast sensitivity functions. They are related to spatio and temporal of the light and their value presents at given init light, how much change is required before an observer reported there was a change. Notice the plural of the word "function", this is for the reason that we can measure Contrast sensitivity functions with not only black-white but also colors. The result of these experiments shows that in most cases our eyes are more sensitive to brightness than color.</p>
+</blockquote>
+<p>Once we know that we're more sensitive to <strong>luma</strong> (the brightness in an image) we can try to exploit it.</p>
+<h3>Color model</h3>
+<p>We first learned <a href="#basic-terminology">how to color images</a> work using the <strong>RGB model</strong>, but there are other models too. In fact, there is a model that separates luma (brightness) from  chrominance (colors) and it is known as <strong>YCbCr</strong><sup>*</sup>.</p>
+<blockquote>
+<p><sup>*</sup> there are more models which do the same separation.</p>
+</blockquote>
+<p>This color model uses <strong>Y</strong> to represent the brightness and two color channels <strong>Cb</strong> (chroma blue) and <strong>Cr</strong> (chroma red). The <a href="https://en.wikipedia.org/wiki/YCbCr">YCbCr</a> can be derived from RGB and it also can be converted back to RGB. Using this model we can create full colored images as we can see down below.</p>
+<p><img alt="ycbcr example" src="References/digital_video_introduction/i/ycbcr.png" title="ycbcr example" /></p>
+<h3>Converting between YCbCr and RGB</h3>
+<p>Some may argue, how can we produce all the <strong>colors without using the green</strong>?</p>
+<p>To answer this question, we'll walk through a conversion from RGB to YCbCr. We'll use the coefficients from the <strong><a href="https://en.wikipedia.org/wiki/Rec._601">standard BT.601</a></strong> that was recommended by the <strong><a href="https://en.wikipedia.org/wiki/ITU-R">group ITU-R<sup>*</sup></a></strong> . The first step is to <strong>calculate the luma</strong>, we'll use the constants suggested by ITU and replace the RGB values.</p>
+<pre><code>Y = 0.299R + 0.587G + 0.114B
+</code></pre>
+<p>Once we had the luma, we can <strong>split the colors</strong> (chroma blue and red):</p>
+<pre><code>Cb = 0.564(B - Y)
+Cr = 0.713(R - Y)
+</code></pre>
+<p>And we can also <strong>convert it back</strong> and even get the <strong>green by using YCbCr</strong>.</p>
+<pre><code>R = Y + 1.402Cr
+B = Y + 1.772Cb
+G = Y - 0.344Cb - 0.714Cr
+</code></pre>
+<blockquote>
+<p><sup>*</sup> groups and standards are common in digital video, they usually define what are the standards, for instance, <a href="https://en.wikipedia.org/wiki/Rec._2020">what is 4K? what frame rate should we use? resolution? color model?</a></p>
+</blockquote>
+<p>Generally, <strong>displays</strong> (monitors, TVs, screens and etc) utilize <strong>only the RGB model</strong>, organized in different manners, see some of them magnified below:</p>
+<p><img alt="pixel geometry" src="References/digital_video_introduction/i/new_pixel_geometry.jpg" title="pixel geometry" /></p>
+<h3>Chroma subsampling</h3>
+<p>With the image represented as luma and chroma components, we can take advantage of the human visual system's greater sensitivity for luma resolution rather than chroma to selectively remove information. <strong>Chroma subsampling</strong> is the technique of encoding images using <strong>less resolution for chroma than for luma</strong>.</p>
+<p><img alt="ycbcr subsampling resolutions" src="References/digital_video_introduction/i/ycbcr_subsampling_resolution.png" title="ycbcr subsampling resolutions" /></p>
+<p>How much should we reduce the chroma resolution?! It turns out that there are already some schemas that describe how to handle resolution and the merge (<code>final color = Y + Cb + Cr</code>).</p>
+<p>These schemas are known as subsampling systems and are expressed as a 3 part ratio - <code>a:x:y</code> which defines the chroma resolution in relation to a <code>a x 2</code> block of luma pixels.</p>
+<ul>
+<li><code>a</code> is the horizontal sampling reference (usually 4)</li>
+<li><code>x</code> is the number of chroma samples in the first row of <code>a</code> pixels (horizontal resolution in relation to <code>a</code>)</li>
+<li><code>y</code> is the number of changes of chroma samples between the first and seconds rows of <code>a</code> pixels.</li>
+</ul>
+<blockquote>
+<p>An exception to this exists with 4:1:0, which provides a single chroma sample within each <code>4 x 4</code> block of luma resolution.</p>
+</blockquote>
+<p>Common schemes used in modern codecs are: <strong>4:4:4</strong> <em>(no subsampling)</em>, <strong>4:2:2, 4:1:1, 4:2:0, 4:1:0 and 3:1:1</strong>.</p>
+<blockquote>
+<p>You can follow some discussions <a href="https://github.com/leandromoreira/digital_video_introduction/issues?q=YCbCr">to learn more about Chroma Subsampling</a>.</p>
+<p><strong>YCbCr 4:2:0 merge</strong></p>
+<p>Here's a merged piece of an image using YCbCr 4:2:0, notice that we only spend 12 bits per pixel.</p>
+<p><img alt="YCbCr 4:2:0 merge" src="References/digital_video_introduction/i/ycbcr_420_merge.png" title="YCbCr 4:2:0 merge" /></p>
+</blockquote>
+<p>You can see the same image encoded by the main chroma subsampling types, images in the first row are the final YCbCr while the last row of images shows the chroma resolution. It's indeed a great win for such small loss.</p>
+<p><img alt="chroma subsampling examples" src="References/digital_video_introduction/i/chroma_subsampling_examples.jpg" title="chroma subsampling examples" /></p>
+<p>Previously we had calculated that we needed <a href="#redundancy-removal">278GB of storage to keep a video file with one hour at 720p resolution and 30fps</a>. If we use <strong>YCbCr 4:2:0</strong> we can cut <strong>this size in half (139 GB)</strong><sup>*</sup> but it is still far from ideal.</p>
+<blockquote>
+<p><sup>*</sup> we found this value by multiplying width, height, bits per pixel and fps. Previously we needed 24 bits, now we only need 12.</p>
+</blockquote>
+<p><br/></p>
+<blockquote>
+<h3>Hands-on: Check YCbCr histogram</h3>
+<p>You can <a href="/encoding_pratical_examples.md#generates-yuv-histogram">check the YCbCr histogram with ffmpeg.</a> This scene has a higher blue contribution, which is showed by the <a href="https://en.wikipedia.org/wiki/Histogram">histogram</a>.</p>
+<p><img alt="ycbcr color histogram" src="References/digital_video_introduction/i/yuv_histogram.png" title="ycbcr color histogram" /></p>
+</blockquote>
+<h3>Color, luma, luminance, gamma video review</h3>
+<p>Watch this incredible video explaining what is luma and learn about luminance, gamma, and color.
+<a href="http://www.youtube.com/watch?v=Ymt47wXUDEU"><img alt="Analog Luma - A history and explanation of video" src="http://img.youtube.com/vi/Ymt47wXUDEU/0.jpg" /></a></p>
+<blockquote>
+<h3>Hands-on: Check YCbCr intensity</h3>
+<p>You can visualize the Y intensity for a given line of a video using <a href="https://ffmpeg.org/ffmpeg-filters.html#oscilloscope">FFmpeg's oscilloscope filter</a>.
+<code>bash
+ffplay -f lavfi -i 'testsrc2=size=1280x720:rate=30000/1001,format=yuv420p' -vf oscilloscope=x=0.5:y=200/720:s=1:c=1</code>
+<img alt="y color oscilloscope" src="References/digital_video_introduction/i/ffmpeg_oscilloscope.png" title="y color oscilloscope" /></p>
+</blockquote>
+<h2>Frame types</h2>
+<p>Now we can move on and try to eliminate the <strong>redundancy in time</strong> but before that let's establish some basic terminology. Suppose we have a movie with 30fps, here are its first 4 frames.</p>
+<p><img alt="ball 1" src="References/digital_video_introduction/i/smw_background_ball_1.png" title="ball 1" /> <img alt="ball 2" src="References/digital_video_introduction/i/smw_background_ball_2.png" title="ball 2" /> <img alt="ball 3" src="References/digital_video_introduction/i/smw_background_ball_3.png" title="ball 3" />
+<img alt="ball 4" src="References/digital_video_introduction/i/smw_background_ball_4.png" title="ball 4" /></p>
+<p>We can see <strong>lots of repetitions</strong> within frames like <strong>the blue background</strong>, it doesn't change from frame 0 to frame 3. To tackle this problem, we can <strong>abstractly categorize</strong> them as three types of frames.</p>
+<h3>I Frame (intra, keyframe)</h3>
+<p>An I-frame (reference, keyframe, intra) is a <strong>self-contained frame</strong>. It doesn't rely on anything to be rendered, an I-frame looks similar to a static photo. The first frame is usually an I-frame but we'll see I-frames inserted regularly among other types of frames.</p>
+<p><img alt="ball 1" src="References/digital_video_introduction/i/smw_background_ball_1.png" title="ball 1" /></p>
+<h3>P Frame (predicted)</h3>
+<p>A P-frame takes advantage of the fact that almost always the current picture can be <strong>rendered using the previous frame.</strong> For instance, in the second frame, the only change was the ball that moved forward. We can <strong>rebuild frame 1, only using the difference and referencing to the previous frame</strong>.</p>
+<p><img alt="ball 1" src="References/digital_video_introduction/i/smw_background_ball_1.png" title="ball 1" /> &lt;-  <img alt="ball 2" src="References/digital_video_introduction/i/smw_background_ball_2_diff.png" title="ball 2" /></p>
+<blockquote>
+<h4>Hands-on: A video with a single I-frame</h4>
+<p>Since a P-frame uses less data why can't we encode an entire <a href="/encoding_pratical_examples.md#1-i-frame-and-the-rest-p-frames">video with a single I-frame and all the rest being P-frames?</a></p>
+<p>After you encoded this video, start to watch it and do a <strong>seek for an advanced</strong> part of the video, you'll notice <strong>it takes some time</strong> to really move to that part. That's because a <strong>P-frame needs a reference frame</strong> (I-frame for instance) to be rendered.</p>
+<p>Another quick test you can do is to encode a video using a single I-Frame and then <a href="/encoding_pratical_examples.md#1-i-frames-per-second-vs-05-i-frames-per-second">encode it inserting an I-frame each 2s</a> and <strong>check the size of each rendition</strong>.</p>
+</blockquote>
+<h3>B Frame (bi-predictive)</h3>
+<p>What about referencing the past and future frames to provide even a better compression?! That's basically what a B-frame is.</p>
+<p><img alt="ball 1" src="References/digital_video_introduction/i/smw_background_ball_1.png" title="ball 1" /> &lt;-  <img alt="ball 2" src="References/digital_video_introduction/i/smw_background_ball_2_diff.png" title="ball 2" /> -&gt; <img alt="ball 3" src="References/digital_video_introduction/i/smw_background_ball_3.png" title="ball 3" /></p>
+<blockquote>
+<h4>Hands-on: Compare videos with B-frame</h4>
+<p>You can generate two renditions, first with B-frames and other with <a href="/encoding_pratical_examples.md#no-b-frames-at-all">no B-frames at all</a> and check the size of the file as well as the quality.</p>
+</blockquote>
+<h3>Summary</h3>
+<p>These frames types are used to <strong>provide better compression</strong>. We'll look how this happens in the next section, but for now we can think of <strong>I-frame as expensive while P-frame is cheaper but the cheapest is the B-frame.</strong></p>
+<p><img alt="frame types example" src="References/digital_video_introduction/i/frame_types.png" title="frame types example" /></p>
+<h2>Temporal redundancy (inter prediction)</h2>
+<p>Let's explore the options we have to reduce the <strong>repetitions in time</strong>, this type of redundancy can be solved with techniques of <strong>inter prediction</strong>.</p>
+<p>We will try to <strong>spend fewer bits</strong> to encode the sequence of frames 0 and 1.</p>
+<p><img alt="original frames" src="References/digital_video_introduction/i/original_frames.png" title="original frames" /></p>
+<p>One thing we can do it's a subtraction, we simply <strong>subtract frame 1 from frame 0</strong> and we get just what we need to <strong>encode the residual</strong>.</p>
+<p><img alt="delta frames" src="References/digital_video_introduction/i/difference_frames.png" title="delta frames" /></p>
+<p>But what if I tell you that there is a <strong>better method</strong> which uses even fewer bits?! First, let's treat the <code>frame 0</code> as a collection of well-defined partitions and then we'll try to match the blocks from <code>frame 0</code> on <code>frame 1</code>. We can think of it as <strong>motion estimation</strong>.</p>
+<blockquote>
+<h3>Wikipedia - block motion compensation</h3>
+<p>"<strong>Block motion compensation</strong> divides up the current frame into non-overlapping blocks, and the motion compensation vector <strong>tells where those blocks come from</strong> (a common misconception is that the previous frame is divided up into non-overlapping blocks, and the motion compensation vectors tell where those blocks move to). The source blocks typically overlap in the source frame. Some video compression algorithms assemble the current frame out of pieces of several different previously-transmitted frames."</p>
+</blockquote>
+<p><img alt="delta frames" src="References/digital_video_introduction/i/original_frames_motion_estimation.png" title="delta frames" /></p>
+<p>We could estimate that the ball moved from <code>x=0, y=25</code> to <code>x=6, y=26</code>, the <strong>x</strong> and <strong>y</strong> values are the <strong>motion vectors</strong>. One <strong>further step</strong> we can do to save bits is to <strong>encode only the motion vector difference</strong> between the last block position and the predicted, so the final motion vector would be <code>x=6 (6-0), y=1 (26-25)</code></p>
+<blockquote>
+<p>In a real-world situation, this <strong>ball would be sliced into n partitions</strong> but the process is the same.</p>
+</blockquote>
+<p>The objects on the frame <strong>move in a 3D way</strong>, the ball can become smaller when it moves to the background. It's normal that <strong>we won't find the perfect match</strong> to the block we tried to find a match. Here's a superposed view of our estimation vs the real picture.</p>
+<p><img alt="motion estimation" src="References/digital_video_introduction/i/motion_estimation.png" title="motion estimation" /></p>
+<p>But we can see that when we apply <strong>motion estimation</strong> the <strong>data to encode is smaller</strong> than using simply delta frame techniques.</p>
+<p><img alt="motion estimation vs delta " src="References/digital_video_introduction/i/comparison_delta_vs_motion_estimation.png" title="motion estimation delta" /></p>
+<blockquote>
+<h3>How real motion compensation would look</h3>
+<p>This technique is applied to all blocks, very often a ball would be partitioned in more than one block.
+ <img alt="real world motion compensation" src="References/digital_video_introduction/i/real_world_motion_compensation.png" title="real world motion compensation" />
+Source: https://web.stanford.edu/class/ee398a/handouts/lectures/EE398a_MotionEstimation_2012.pdf</p>
+</blockquote>
+<p>You can <a href="/frame_difference_vs_motion_estimation_plus_residual.ipynb">play around with these concepts using jupyter</a>.</p>
+<blockquote>
+<h4>Hands-on: See the motion vectors</h4>
+<p>We can <a href="/encoding_pratical_examples.md#generate-debug-video">generate a video with the inter prediction (motion vectors)  with ffmpeg.</a></p>
+<p><img alt="inter prediction (motion vectors) with ffmpeg" src="References/digital_video_introduction/i/motion_vectors_ffmpeg.png" title="inter prediction (motion vectors) with ffmpeg" /></p>
+<p>Or we can use the <a href="https://software.intel.com/en-us/intel-video-pro-analyzer">Intel Video Pro Analyzer</a> (which is paid but there is a free trial version which limits you to only work with the first 10 frames).</p>
+<p><img alt="inter prediction intel video pro analyzer" src="References/digital_video_introduction/i/inter_prediction_intel_video_pro_analyzer.png" title="inter prediction intel video pro analyzer" /></p>
+</blockquote>
+<h2>Spatial redundancy (intra prediction)</h2>
+<p>If we analyze <strong>each frame</strong> in a video we'll see that there are also <strong>many areas that are correlated</strong>.</p>
+<p><img alt="" src="References/digital_video_introduction/i/repetitions_in_space.png" /></p>
+<p>Let's walk through an example. This scene is mostly composed of blue and white colors.</p>
+<p><img alt="" src="References/digital_video_introduction/i/smw_bg.png" /></p>
+<p>This is an <code>I-frame</code> and we <strong>can't use previous frames</strong> to predict from but we still can compress it. We will encode the red block selection. If we <strong>look at its neighbors</strong>, we can <strong>estimate</strong> that there is a <strong>trend of colors around it</strong>.</p>
+<p><img alt="" src="References/digital_video_introduction/i/smw_bg_block.png" /></p>
+<p>We will <strong>predict</strong> that the frame will continue to <strong>spread the colors vertically</strong>, it means that the colors of the <strong>unknown pixels will hold the values of its neighbors</strong>.</p>
+<p><img alt="" src="References/digital_video_introduction/i/smw_bg_prediction.png" /></p>
+<p>Our <strong>prediction can be wrong</strong>, for that reason we need to apply this technique (<strong>intra prediction</strong>) and then <strong>subtract the real values</strong> which gives us the residual block, resulting in a much more compressible matrix compared to the original.</p>
+<p><img alt="" src="References/digital_video_introduction/i/smw_residual.png" /></p>
+<p>There are many different types of this sort of prediction. The one you see pictured here is a form of straight planar prediction, where the pixels from the row above the block are copied row to row within the block. Planar prediction also can involve an angular component, where pixels from both the left and the top are used to help predict the current block. And there is also DC prediction, which involves taking the average of the samples right above and to the left of the block. </p>
+<blockquote>
+<h4>Hands-on: Check intra predictions</h4>
+<p>You can <a href="/encoding_pratical_examples.md#generate-debug-video">generate a video with macro blocks and their predictions with ffmpeg.</a> Please check the ffmpeg documentation to understand the <a href="https://trac.ffmpeg.org/wiki/Debug/MacroblocksAndMotionVectors?version=7#AnalyzingMacroblockTypes">meaning of each block color</a>.</p>
+<p><img alt="intra prediction (macro blocks) with ffmpeg" src="References/digital_video_introduction/i/macro_blocks_ffmpeg.png" title="inter prediction (motion vectors) with ffmpeg" /></p>
+<p>Or we can use the <a href="https://software.intel.com/en-us/intel-video-pro-analyzer">Intel Video Pro Analyzer</a> (which is paid but there is a free trial version which limits you to only work with the first 10 frames).</p>
+<p><img alt="intra prediction intel video pro analyzer" src="References/digital_video_introduction/i/intra_prediction_intel_video_pro_analyzer.png" title="intra prediction intel video pro analyzer" /></p>
+</blockquote>
+
+            </div>
+        </div>
+    </section>
+    
+    <section id="how-does-a-video-codec-work" class="py-24 bg-white swiss-border-b">
+        <div class="max-w-7xl mx-auto px-6 md:px-12 swiss-container fade-up">
+            <span class="type-label mb-6 block text-[var(--swiss-red)]">Section</span>
+            <h2 class="type-display mb-12">How does a video codec work?</h2>
+            
+            <div class="markdown-content max-w-4xl">
+                
+<h2>What? Why? How?</h2>
+<p><strong>What?</strong> It's a piece of software / hardware that compresses or decompresses digital video. <strong>Why?</strong> Market and society demands higher quality videos with limited bandwidth or storage. Remember when we <a href="#basic-terminology">calculated the needed bandwidth</a> for 30 frames per second, 24 bits per pixel, resolution of a 480x240 video? It was <strong>82.944 Mbps</strong> with no compression applied. It's the only way to deliver HD/FullHD/4K in TVs and the Internet. <strong>How?</strong> We'll take a brief look at the major techniques here.</p>
+<blockquote>
+<p><strong>CODEC vs Container</strong></p>
+<p>One common mistake that beginners often do is to confuse digital video CODEC and <a href="https://en.wikipedia.org/wiki/Digital_container_format">digital video container</a>. We can think of <strong>containers</strong> as a wrapper format which contains metadata of the video (and possible audio too), and the <strong>compressed video</strong> can be seen as its payload.</p>
+<p>Usually, the extension of a video file defines its video container. For instance, the file <code>video.mp4</code> is probably a <strong><a href="https://en.wikipedia.org/wiki/MPEG-4_Part_14">MPEG-4 Part 14</a></strong> container and a file named <code>video.mkv</code> it's probably a <strong><a href="https://en.wikipedia.org/wiki/Matroska">matroska</a></strong>. To be completely sure about the codec and container format we can use <a href="/encoding_pratical_examples.md#inspect-stream">ffmpeg or mediainfo</a>.</p>
+</blockquote>
+<h2>History</h2>
+<p>Before we jump into the inner workings of a generic codec, let's look back to understand a little better about some old video codecs.</p>
+<p>The video codec <a href="https://en.wikipedia.org/wiki/H.261">H.261</a>  was born in 1990 (technically 1988), and it was designed to work with <strong>data rates of 64 kbit/s</strong>. It already uses ideas such as chroma subsampling, macro block, etc. In the year of 1995, the <strong>H.263</strong> video codec standard was published and continued to be extended until 2001.</p>
+<p>In 2003 the first version of <strong>H.264/AVC</strong> was completed. In the same year, <strong>On2 Technologies</strong>  (formerly known as the Duck Corporation) released their video codec as a <strong>royalty-free</strong> lossy video compression called <strong>VP3</strong>. In 2008, <strong>Google bought</strong> this company, releasing <strong>VP8</strong> in the same year. In December of 2012, Google released the <strong>VP9</strong> and it's  <strong>supported by roughly ¾ of the browser market</strong> (mobile included).</p>
+<p><strong><a href="https://en.wikipedia.org/wiki/AOMedia_Video_1">AV1</a></strong> is a new <strong>royalty-free</strong> and open source video codec that's being designed by the <a href="http://aomedia.org/">Alliance for Open Media (AOMedia)</a>, which is composed of the <strong>companies: Google, Mozilla, Microsoft, Amazon, Netflix, AMD, ARM, NVidia, Intel and Cisco</strong> among others. The <strong>first version</strong> 0.1.0 of the reference codec was <strong>published on April 7, 2016</strong>.</p>
+<p><img alt="codec history timeline" src="References/digital_video_introduction/i/codec_history_timeline.png" title="codec history timeline" /></p>
+<blockquote>
+<h4>The birth of AV1</h4>
+<p>Early 2015, Google was working on <a href="https://en.wikipedia.org/wiki/VP9#Successor:_from_VP10_to_AV1">VP10</a>, Xiph (Mozilla) was working on <a href="https://xiph.org/daala/">Daala</a> and Cisco open-sourced its royalty-free video codec called <a href="https://tools.ietf.org/html/draft-fuldseth-netvc-thor-03">Thor</a>.</p>
+<p>Then MPEG LA first announced annual caps for HEVC (H.265) and fees 8 times higher than H.264 but soon they changed the rules again:
+* <strong>no annual cap</strong>,
+* <strong>content fee</strong> (0.5% of revenue) and
+* <strong>per-unit fees about 10 times higher than h264</strong>.</p>
+<p>The <a href="http://aomedia.org/about/">alliance for open media</a> was created by companies from hardware manufacturer (Intel, AMD, ARM , Nvidia, Cisco), content delivery (Google, Netflix, Amazon), browser maintainers (Google, Mozilla), and others.</p>
+<p>The companies had a common goal, a royalty-free video codec and then AV1 was born with a much <a href="http://aomedia.org/license/patent/">simpler patent license</a>. <strong>Timothy B. Terriberry</strong> did an awesome presentation, which is the source of this section, about the <a href="https://www.youtube.com/watch?v=lzPaldsmJbk">AV1 conception, license model and its current state</a>.</p>
+<p>You'll be surprised to know that you can <strong>analyze the AV1 codec through your browser</strong>, go to https://arewecompressedyet.com/analyzer/</p>
+<p><img alt="av1 browser analyzer" src="References/digital_video_introduction/i/av1_browser_analyzer.png" title="av1 browser analyzer" /></p>
+<p>PS: If you want to learn more about the history of the codecs you must learn the basics behind <a href="https://www.vcodex.com/video-compression-patents/">video compression patents</a>.</p>
+</blockquote>
+<h2>A generic codec</h2>
+<p>We're going to introduce the <strong>main mechanics behind a generic video codec</strong> but most of these concepts are useful and used in modern codecs such as VP9, AV1 and HEVC. Be sure to understand that we're going to simplify things a LOT. Sometimes we'll use a real example (mostly H.264) to demonstrate a technique.</p>
+<h2>1st step - picture partitioning</h2>
+<p>The first step is to <strong>divide the frame</strong> into several <strong>partitions, sub-partitions</strong> and beyond.</p>
+<p><img alt="picture partitioning" src="References/digital_video_introduction/i/picture_partitioning.png" title="picture partitioning" /></p>
+<p><strong>But why?</strong> There are many reasons, for instance, when we split the picture we can work the predictions more precisely, using small partitions for the small moving parts while using bigger partitions to a static background.</p>
+<p>Usually, the CODECs <strong>organize these partitions</strong> into slices (or tiles), macro (or coding tree units) and many sub-partitions. The max size of these partitions varies, HEVC sets 64x64 while AVC uses 16x16 but the sub-partitions can reach sizes of 4x4.</p>
+<p>Remember that we learned how <strong>frames are typed</strong>?! Well, you can <strong>apply those ideas to blocks</strong> too, therefore we can have I-Slice, B-Slice, I-Macroblock and etc.</p>
+<blockquote>
+<h3>Hands-on: Check partitions</h3>
+<p>We can also use the <a href="https://software.intel.com/en-us/intel-video-pro-analyzer">Intel Video Pro Analyzer</a> (which is paid but there is a free trial version which limits you to only work with the first 10 frames). Here are <a href="/encoding_pratical_examples.md#transcoding">VP9 partitions</a> analyzed.</p>
+<p><img alt="VP9 partitions view intel video pro analyzer " src="References/digital_video_introduction/i/paritions_view_intel_video_pro_analyzer.png" title="VP9 partitions view intel video pro analyzer" /></p>
+</blockquote>
+<h2>2nd step - predictions</h2>
+<p>Once we have the partitions, we can make predictions over them. For the <a href="#temporal-redundancy-inter-prediction">inter prediction</a> we need <strong>to send the motion vectors and the residual</strong> and the <a href="#spatial-redundancy-intra-prediction">intra prediction</a> we'll <strong>send the prediction direction and the residual</strong> as well.</p>
+<h2>3rd step - transform</h2>
+<p>After we get the residual block (<code>predicted partition - real partition</code>), we can <strong>transform</strong> it in a way that lets us know which <strong>pixels we can discard</strong> while keeping the <strong>overall quality</strong>. There are some transformations for this exact behavior.</p>
+<p>Although there are <a href="https://en.wikipedia.org/wiki/List_of_Fourier-related_transforms#Discrete_transforms">other transformations</a>, we'll look more closely at the discrete cosine transform (DCT). The <a href="https://en.wikipedia.org/wiki/Discrete_cosine_transform"><strong>DCT</strong></a> main features are:</p>
+<ul>
+<li><strong>converts</strong> blocks of <strong>pixels</strong> into  same-sized blocks of <strong>frequency coefficients</strong>.</li>
+<li><strong>compacts</strong> energy, making it easy to eliminate spatial redundancy.</li>
+<li>is <strong>reversible</strong>, a.k.a. you can reverse to pixels.</li>
+</ul>
+<blockquote>
+<p>On 2 Feb 2017, Cintra, R. J. and Bayer, F. M have published their paper <a href="https://arxiv.org/abs/1702.00817">DCT-like Transform for Image Compression
+Requires 14 Additions Only</a>.</p>
+</blockquote>
+<p>Don't worry if you didn't understand the benefits from every bullet point, we'll try to make some experiments in order to see the real value from it.</p>
+<p>Let's take the following <strong>block of pixels</strong> (8x8):</p>
+<p><img alt="pixel values matrix" src="References/digital_video_introduction/i/pixel_matrice.png" title="pixel values matrix" /></p>
+<p>Which renders to the following block image (8x8):</p>
+<p><img alt="pixel values matrix" src="References/digital_video_introduction/i/gray_image.png" title="pixel values matrix" /></p>
+<p>When we <strong>apply the DCT</strong> over this block of pixels and we get the <strong>block of coefficients</strong> (8x8):</p>
+<p><img alt="coefficients values" src="References/digital_video_introduction/i/dct_coefficient_values.png" title="coefficients values" /></p>
+<p>And if we render this block of coefficients, we'll get this image:</p>
+<p><img alt="dct coefficients image" src="References/digital_video_introduction/i/dct_coefficient_image.png" title="dct coefficients image" /></p>
+<p>As you can see it looks nothing like the original image, we might notice that the <strong>first coefficient</strong> is very different from all the others. This first coefficient is known as the DC coefficient which represents <strong>all the samples</strong> in the input array, something <strong>similar to an average</strong>.</p>
+<p>This block of coefficients has an interesting property which is that it separates the high-frequency components from the low frequency.</p>
+<p><img alt="dct frequency coefficients property" src="References/digital_video_introduction/i/dctfrequ.jpg" title="dct frequency coefficients property" /></p>
+<p>In an image, <strong>most of the energy</strong> will be concentrated in the <a href="https://web.archive.org/web/20150129171151/https://www.iem.thm.de/telekom-labor/zinke/mk/mpeg2beg/whatisit.htm"><strong>lower frequencies</strong></a>, so if we transform an image into its frequency components and <strong>throw away the higher frequency coefficients</strong>, we can <strong>reduce the amount of data</strong> needed to describe the image without sacrificing too much image quality.</p>
+<blockquote>
+<p>frequency means how fast a signal is changing</p>
+</blockquote>
+<p>Let's try to apply the knowledge we acquired in the test by converting the original image to its frequency (block of coefficients) using DCT and then throwing away part of the least important coefficients.</p>
+<p>First, we convert it to its <strong>frequency domain</strong>.</p>
+<p><img alt="coefficients values" src="References/digital_video_introduction/i/dct_coefficient_values.png" title="coefficients values" /></p>
+<p>Next, we discard part (67%) of the coefficients, mostly the bottom right part of it.</p>
+<p><img alt="zeroed coefficients" src="References/digital_video_introduction/i/dct_coefficient_zeroed.png" title="zeroed coefficients" /></p>
+<p>Finally, we reconstruct the image from this discarded block of coefficients (remember, it needs to be reversible) and compare it to the original.</p>
+<p><img alt="original vs quantized" src="References/digital_video_introduction/i/original_vs_quantized.png" title="original vs quantized" /></p>
+<p>As we can see it resembles the original image but it introduced lots of differences from the original, we <strong>throw away 67.1875%</strong> and we still were able to get at least something similar to the original. We could more intelligently discard the coefficients to have a better image quality but that's the next topic.</p>
+<blockquote>
+<p><strong>Each coefficient is formed using all the pixels</strong></p>
+<p>It's important to note that each coefficient doesn't directly map to a single pixel but it's a weighted sum of all pixels. This amazing graph shows how the first and second coefficient is calculated, using weights which are unique for each index.</p>
+<p><img alt="dct calculation" src="References/digital_video_introduction/i/applicat.jpg" title="dct calculation" /></p>
+<p>Source: https://web.archive.org/web/20150129171151/https://www.iem.thm.de/telekom-labor/zinke/mk/mpeg2beg/whatisit.htm</p>
+<p>You can also try to <a href="/dct_better_explained.ipynb">visualize the DCT by looking at a simple image</a> formation over the DCT basis. For instance, here's the <a href="https://en.wikipedia.org/wiki/Discrete_cosine_transform#Example_of_IDCT">A character being formed</a> using each coefficient weight.</p>
+<p><img alt="" src="https://upload.wikimedia.org/wikipedia/commons/5/5e/Idct-animation.gif" /></p>
+</blockquote>
+<p><br/></p>
+<blockquote>
+<h3>Hands-on: throwing away different coefficients</h3>
+<p>You can play around with the <a href="/uniform_quantization_experience.ipynb">DCT transform</a>.</p>
+</blockquote>
+<h2>4th step - quantization</h2>
+<p>When we throw away some of the coefficients, in the last step (transform), we kinda did some form of quantization. This step is where we chose to lose information (the <strong>lossy part</strong>) or in simple terms, we'll <strong>quantize coefficients to achieve compression</strong>.</p>
+<p>How can we quantize a block of coefficients? One simple method would be a uniform quantization, where we take a block, <strong>divide it by a single value</strong> (10) and round this value.</p>
+<p><img alt="quantize" src="References/digital_video_introduction/i/quantize.png" title="quantize" /></p>
+<p>How can we <strong>reverse</strong> (re-quantize) this block of coefficients? We can do that by <strong>multiplying the same value</strong> (10) we divide it first.</p>
+<p><img alt="re-quantize" src="References/digital_video_introduction/i/re-quantize.png" title="re-quantize" /></p>
+<p>This <strong>approach isn't the best</strong> because it doesn't take into account the importance of each coefficient, we could use a <strong>matrix of quantizers</strong> instead of a single value, this matrix can exploit the property of the DCT, quantizing most the bottom right and less the upper left, the <a href="https://www.hdm-stuttgart.de/~maucher/Python/MMCodecs/html/jpegUpToQuant.html">JPEG uses a similar approach</a>, you can check <a href="https://github.com/google/guetzli/blob/master/guetzli/jpeg_data.h#L40">source code to see this matrix</a>.</p>
+<blockquote>
+<h3>Hands-on: quantization</h3>
+<p>You can play around with the <a href="/dct_experiences.ipynb">quantization</a>.</p>
+</blockquote>
+<h2>5th step - entropy coding</h2>
+<p>After we quantized the data (image blocks/slices/frames) we still can compress it in a lossless way. There are many ways (algorithms) to compress data. We're going to briefly experience some of them, for a deeper understanding you can read the amazing book <a href="https://www.amazon.com/Understanding-Compression-Data-Modern-Developers/dp/1491961538/">Understanding Compression: Data Compression for Modern Developers</a>.</p>
+<h3>VLC coding:</h3>
+<p>Let's suppose we have a stream of the symbols: <strong>a</strong>, <strong>e</strong>, <strong>r</strong> and <strong>t</strong> and their probability (from 0 to 1) is represented by this table.</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>a</th>
+<th>e</th>
+<th>r</th>
+<th>t</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>probability</td>
+<td>0.3</td>
+<td>0.3</td>
+<td>0.2</td>
+<td>0.2</td>
+</tr>
+</tbody>
+</table>
+<p>We can assign unique binary codes (preferable small) to the most probable and bigger codes to the least probable ones.</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>a</th>
+<th>e</th>
+<th>r</th>
+<th>t</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>probability</td>
+<td>0.3</td>
+<td>0.3</td>
+<td>0.2</td>
+<td>0.2</td>
+</tr>
+<tr>
+<td>binary code</td>
+<td>0</td>
+<td>10</td>
+<td>110</td>
+<td>1110</td>
+</tr>
+</tbody>
+</table>
+<p>Let's compress the stream <strong>eat</strong>, assuming we would spend 8 bits for each symbol, we would spend <strong>24 bits</strong> without any compression. But in case we replace each symbol for its code we can save space.</p>
+<p>The first step is to encode the symbol <strong>e</strong> which is <code>10</code> and the second symbol is <strong>a</strong> which is added (not in a mathematical way) <code>[10][0]</code> and finally the third symbol <strong>t</strong> which makes our final compressed bitstream to be <code>[10][0][1110]</code> or <code>1001110</code> which only requires <strong>7 bits</strong> (3.4 times less space than the original).</p>
+<p>Notice that each code must be a unique prefixed code <a href="https://en.wikipedia.org/wiki/Huffman_coding">Huffman can help you to find these numbers</a>. Though it has some issues there are <a href="https://en.wikipedia.org/wiki/Context-adaptive_variable-length_coding">video codecs that still offers</a> this method and it's the  algorithm for many applications which requires compression.</p>
+<p>Both encoder and decoder <strong>must know</strong> the symbol table with its code, therefore, you need to send the table too.</p>
+<h3>Arithmetic coding:</h3>
+<p>Let's suppose we have a stream of the symbols: <strong>a</strong>, <strong>e</strong>, <strong>r</strong>, <strong>s</strong> and <strong>t</strong> and their probability is represented by this table.</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>a</th>
+<th>e</th>
+<th>r</th>
+<th>s</th>
+<th>t</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>probability</td>
+<td>0.3</td>
+<td>0.3</td>
+<td>0.15</td>
+<td>0.05</td>
+<td>0.2</td>
+</tr>
+</tbody>
+</table>
+<p>With this table in mind, we can build ranges containing all the possible symbols sorted by the most frequents.</p>
+<p><img alt="initial arithmetic range" src="References/digital_video_introduction/i/range.png" title="initial arithmetic range" /></p>
+<p>Now let's encode the stream <strong>eat</strong>, we pick the first symbol <strong>e</strong> which is located within the subrange <strong>0.3 to 0.6</strong> (but not included) and we take this subrange and split it again using the same proportions used before but within this new range.</p>
+<p><img alt="second sub range" src="References/digital_video_introduction/i/second_subrange.png" title="second sub range" /></p>
+<p>Let's continue to encode our stream <strong>eat</strong>, now we take the second symbol <strong>a</strong> which is within the new subrange <strong>0.3 to 0.39</strong> and then we take our last symbol <strong>t</strong> and we do the same process again and we get the last subrange <strong>0.354 to 0.372</strong>.</p>
+<p><img alt="final arithmetic range" src="References/digital_video_introduction/i/arithimetic_range.png" title="final arithmetic range" /></p>
+<p>We just need to pick a number within the last subrange <strong>0.354 to 0.372</strong>, let's choose <strong>0.36</strong> but we could choose any number within this subrange. With <strong>only</strong> this number we'll be able to recover our original stream <strong>eat</strong>. If you think about it, it's like if we were drawing a line within ranges of ranges to encode our stream.</p>
+<p><img alt="final range traverse" src="References/digital_video_introduction/i/range_show.png" title="final range traverse" /></p>
+<p>The <strong>reverse process</strong> (A.K.A. decoding) is equally easy, with our number <strong>0.36</strong> and our original range we can run the same process but now using this number to reveal the stream encoded behind this number.</p>
+<p>With the first range, we notice that our number fits at the slice, therefore, it's our first symbol, now we split this subrange again, doing the same process as before, and we'll notice that <strong>0.36</strong> fits the symbol <strong>a</strong> and after we repeat the process we came to the last symbol <strong>t</strong> (forming our original encoded stream <em>eat</em>).</p>
+<p>Both encoder and decoder <strong>must know</strong> the symbol probability table, therefore you need to send the table.</p>
+<p>Pretty neat, isn't it? People are damn smart to come up with a such solution, some <a href="https://en.wikipedia.org/wiki/Context-adaptive_binary_arithmetic_coding">video codecs use</a> this technique (or at least offer it as an option).</p>
+<p>The idea is to lossless compress the quantized bitstream, for sure this article is missing tons of details, reasons, trade-offs and etc. But <a href="https://www.amazon.com/Understanding-Compression-Data-Modern-Developers/dp/1491961538/">you should learn more</a> as a developer. Newer codecs are trying to use different <a href="https://en.wikipedia.org/wiki/Asymmetric_Numeral_Systems">entropy coding algorithms like ANS.</a></p>
+<blockquote>
+<h3>Hands-on: CABAC vs CAVLC</h3>
+<p>You can <a href="https://github.com/leandromoreira/introduction_video_technology/blob/master/encoding_pratical_examples.md#cabac-vs-cavlc">generate two streams, one with CABAC and other with CAVLC</a> and <strong>compare the time</strong> it took to generate each of them as well as <strong>the final size</strong>.</p>
+</blockquote>
+<h2>6th step - bitstream format</h2>
+<p>After we did all these steps we need to <strong>pack the compressed frames and context to these steps</strong>. We need to explicitly inform to the decoder about <strong>the decisions taken by the encoder</strong>, such as bit depth, color space, resolution, predictions info (motion vectors, intra prediction direction), profile, level, frame rate, frame type, frame number and much more.</p>
+<p>We're going to study, superficially, the H.264 bitstream. Our first step is to <a href="/encoding_pratical_examples.md#generate-a-single-frame-h264-bitstream">generate a minimal  H.264 <sup>*</sup> bitstream</a>, we can do that using our own repository and <a href="http://ffmpeg.org/">ffmpeg</a>.</p>
+<pre><code>./s/ffmpeg -i /files/i/minimal.png -pix_fmt yuv420p /files/v/minimal_yuv420.h264
+</code></pre>
+<blockquote>
+<p><sup><em></sup> ffmpeg adds, by default, all the encoding parameter as a </em><em>SEI NAL</em>*, soon we'll define what is a NAL.</p>
+</blockquote>
+<p>This command will generate a raw h264 bitstream with a <strong>single frame</strong>, 64x64, with color space yuv420 and using the following image as the frame.</p>
+<blockquote>
+<p><img alt="used frame to generate minimal h264 bitstream" src="References/digital_video_introduction/i/minimal.png" title="used frame to generate minimal h264 bitstream" /></p>
+</blockquote>
+<h3>H.264 bitstream</h3>
+<p>The AVC (H.264) standard defines that the information will be sent in <strong>macro frames</strong> (in the network sense), called <strong><a href="https://en.wikipedia.org/wiki/Network_Abstraction_Layer">NAL</a></strong> (Network Abstraction Layer). The main goal of the NAL is the provision of a "network-friendly" video representation, this standard must work on TVs (stream based), the Internet (packet based) among others.</p>
+<p><img alt="NAL units H.264" src="References/digital_video_introduction/i/nal_units.png" title="NAL units H.264" /></p>
+<p>There is a <strong><a href="https://en.wikipedia.org/wiki/Frame_synchronization">synchronization marker</a></strong> to define the boundaries of the NAL's units. Each synchronization marker holds a value of <code>0x00 0x00 0x01</code> except to the very first one which is <code>0x00 0x00 0x00 0x01</code>. If we run the <strong>hexdump</strong> on the generated h264 bitstream, we can identify at least three NALs in the beginning of the file.</p>
+<p><img alt="synchronization marker on NAL units" src="References/digital_video_introduction/i/minimal_yuv420_hex.png" title="synchronization marker on NAL units" /></p>
+<p>As we said before, the decoder needs to know not only the picture data but also the details of the video, frame, colors, used parameters, and others. The <strong>first byte</strong> of each NAL defines its category and <strong>type</strong>.</p>
+<table>
+<thead>
+<tr>
+<th>NAL type id</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>Undefined</td>
+</tr>
+<tr>
+<td>1</td>
+<td>Coded slice of a non-IDR picture</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Coded slice data partition A</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Coded slice data partition B</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Coded slice data partition C</td>
+</tr>
+<tr>
+<td>5</td>
+<td><strong>IDR</strong> Coded slice of an IDR picture</td>
+</tr>
+<tr>
+<td>6</td>
+<td><strong>SEI</strong> Supplemental enhancement information</td>
+</tr>
+<tr>
+<td>7</td>
+<td><strong>SPS</strong> Sequence parameter set</td>
+</tr>
+<tr>
+<td>8</td>
+<td><strong>PPS</strong> Picture parameter set</td>
+</tr>
+<tr>
+<td>9</td>
+<td>Access unit delimiter</td>
+</tr>
+<tr>
+<td>10</td>
+<td>End of sequence</td>
+</tr>
+<tr>
+<td>11</td>
+<td>End of stream</td>
+</tr>
+<tr>
+<td>...</td>
+<td>...</td>
+</tr>
+</tbody>
+</table>
+<p>Usually, the first NAL of a bitstream is a <strong>SPS</strong>, this type of NAL is responsible for informing the general encoding variables like <strong>profile</strong>, <strong>level</strong>, <strong>resolution</strong> and others.</p>
+<p>If we skip the first synchronization marker we can decode the <strong>first byte</strong> to know what <strong>type of NAL</strong> is the first one.</p>
+<p>For instance the first byte after the synchronization marker is <code>01100111</code>, where the first bit (<code>0</code>) is to the field <strong>forbidden_zero_bit</strong>, the next 2 bits (<code>11</code>) tell us the field <strong>nal_ref_idc</strong> which indicates whether this NAL is a reference field or not and the rest 5 bits (<code>00111</code>) inform us the field <strong>nal_unit_type</strong>, in this case, it's a <strong>SPS</strong> (7) NAL unit.</p>
+<p>The second byte (<code>binary=01100100, hex=0x64, dec=100</code>) of an SPS NAL is the field <strong>profile_idc</strong> which shows the profile that the encoder has used, in this case, we used the <strong><a href="https://en.wikipedia.org/wiki/H.264/MPEG-4_AVC#Profiles">high profile</a></strong>. Also the third byte contains several flags which determine the exact profile (like constrained or progressive). But in our case the third byte is 0x00 and therefore the encoder has used just high profile.</p>
+<p><img alt="SPS binary view" src="References/digital_video_introduction/i/minimal_yuv420_bin.png" title="SPS binary view" /></p>
+<p>When we read the H.264 bitstream spec for an SPS NAL we'll find many values for the <strong>parameter name</strong>, <strong>category</strong> and a <strong>description</strong>, for instance, let's look at <code>pic_width_in_mbs_minus_1</code> and <code>pic_height_in_map_units_minus_1</code> fields.</p>
+<table>
+<thead>
+<tr>
+<th>Parameter name</th>
+<th>Category</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>pic_width_in_mbs_minus_1</td>
+<td>0</td>
+<td>ue(v)</td>
+</tr>
+<tr>
+<td>pic_height_in_map_units_minus_1</td>
+<td>0</td>
+<td>ue(v)</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>ue(v)</strong>: unsigned integer <a href="https://ghostarchive.org/archive/JBwdI">Exp-Golomb-coded</a></p>
+</blockquote>
+<p>If we do some math with the value of these fields we will end up with the <strong>resolution</strong>. We can represent a <code>1920 x 1080</code> using a <code>pic_width_in_mbs_minus_1</code> with the value of <code>119 ( (119 + 1) * macroblock_size = 120 * 16 = 1920)</code>, again saving space, instead of encode <code>1920</code> we did it with <code>119</code>.</p>
+<p>If we continue to examine our created video with a binary view (ex: <code>xxd -b -c 11 v/minimal_yuv420.h264</code>), we can skip to the last NAL which is the frame itself.</p>
+<p><img alt="h264 idr slice header" src="References/digital_video_introduction/i/slice_nal_idr_bin.png" title="h264 idr slice header" /></p>
+<p>We can see its first 6 bytes values: <code>01100101 10001000 10000100 00000000 00100001 11111111</code>. As we already know the first byte tell us about what type of NAL it is, in this case, (<code>00101</code>) it's an <strong>IDR Slice (5)</strong> and we can further inspect it:</p>
+<p><img alt="h264 slice header spec" src="References/digital_video_introduction/i/slice_header.png" title="h264 slice header spec" /></p>
+<p>Using the spec info we can decode what type of slice (<strong>slice_type</strong>), the frame number (<strong>frame_num</strong>) among others important fields.</p>
+<p>In order to get the values of some fields (<code>ue(v), me(v), se(v) or te(v)</code>) we need to decode it using a special decoder called <a href="https://ghostarchive.org/archive/JBwdI">Exponential-Golomb</a>, this method is <strong>very efficient to encode variable values</strong>, mostly when there are many default values.</p>
+<blockquote>
+<p>The values of <strong>slice_type</strong> and <strong>frame_num</strong> of this video are 7 (I slice) and 0 (the first frame).</p>
+</blockquote>
+<p>We can see the <strong>bitstream as a protocol</strong> and if you want or need to learn more about this bitstream please refer to the <a href="http://www.itu.int/rec/T-REC-H.264-201610-I">ITU H.264 spec.</a> Here's a macro diagram which shows where the picture data (compressed YUV) resides.</p>
+<p><img alt="h264 bitstream macro diagram" src="References/digital_video_introduction/i/h264_bitstream_macro_diagram.png" title="h264 bitstream macro diagram" /></p>
+<p>We can explore others bitstreams like the <a href="https://storage.googleapis.com/downloads.webmproject.org/docs/vp9/vp9-bitstream-specification-v0.6-20160331-draft.pdf">VP9 bitstream</a>, <a href="http://handle.itu.int/11.1002/1000/11885-en?locatt=format:pdf">H.265 (HEVC)</a> or even our <strong>new best friend</strong> <a href="https://medium.com/@mbebenita/av1-bitstream-analyzer-d25f1c27072b#.d5a89oxz8"><strong>AV1</strong> bitstream</a>, <a href="http://www.gpac-licensing.com/2016/07/12/vp9-av1-bitstream-format/">do they all look similar? No</a>, but once you learned one you can easily get the others.</p>
+<blockquote>
+<h3>Hands-on: Inspect the H.264 bitstream</h3>
+<p>We can <a href="https://github.com/leandromoreira/introduction_video_technology/blob/master/encoding_pratical_examples.md#generate-a-single-frame-video">generate a single frame video</a> and use  <a href="https://en.wikipedia.org/wiki/MediaInfo">mediainfo</a> to inspect its H.264 bitstream. In fact, you can even see the <a href="https://github.com/MediaArea/MediaInfoLib/blob/master/Source/MediaInfo/Video/File_Avc.cpp">source code that parses h264 (AVC)</a> bitstream.</p>
+<p><img alt="mediainfo details h264 bitstream" src="References/digital_video_introduction/i/mediainfo_details_1.png" title="mediainfo details h264 bitstream" /></p>
+<p>We can also use the <a href="https://software.intel.com/en-us/intel-video-pro-analyzer">Intel Video Pro Analyzer</a> which is paid but there is a free trial version which limits you to only work with the first 10 frames but that's okay for learning purposes.</p>
+<p><img alt="intel video pro analyzer details h264 bitstream" src="References/digital_video_introduction/i/intel-video-pro-analyzer.png" title="intel video pro analyzer details h264 bitstream" /></p>
+</blockquote>
+<h2>Review</h2>
+<p>We'll notice that many of the <strong>modern codecs uses this same model we learned</strong>. In fact, let's look at the Thor video codec block diagram, it contains all the steps we studied. The idea is that you now should be able to at least understand better the innovations and papers for the area.</p>
+<p><img alt="thor_codec_block_diagram" src="References/digital_video_introduction/i/thor_codec_block_diagram.png" title="thor_codec_block_diagram" /></p>
+<p>Previously we had calculated that we needed <a href="#chroma-subsampling">139GB of storage to keep a video file with one hour at 720p resolution and 30fps</a> if we use the techniques we learned here, like <strong>inter and intra prediction, transform, quantization, entropy coding and other</strong> we can achieve, assuming we are spending <strong>0.031 bit per pixel</strong>, the same perceivable quality video <strong>requiring only 367.82MB vs 139GB</strong> of store.</p>
+<blockquote>
+<p>We choose to use <strong>0.031 bit per pixel</strong> based on the example video provided here.</p>
+</blockquote>
+<h2>How does H.265 achieve a better compression ratio than H.264?</h2>
+<p>Now that we know more about how codecs work, then it is easy to understand how new codecs are able to deliver higher resolutions with fewer bits.</p>
+<p>We will compare AVC and HEVC, let's keep in mind that it is almost always a trade-off between more CPU cycles (complexity) and compression rate.</p>
+<p>HEVC has bigger and more <strong>partitions</strong> (and <strong>sub-partitions</strong>) options than AVC, more <strong>intra predictions directions/angles</strong>, <strong>improved entropy coding</strong> and more, all these improvements made H.265 capable to compress 50% more than H.264.</p>
+<p><img alt="h264 vs h265" src="References/digital_video_introduction/i/avc_vs_hevc.png" title="H.264 vs H.265" /></p>
+
+            </div>
+        </div>
+    </section>
+    
+    <section id="online-streaming" class="py-24 bg-white swiss-border-b">
+        <div class="max-w-7xl mx-auto px-6 md:px-12 swiss-container fade-up">
+            <span class="type-label mb-6 block text-[var(--swiss-red)]">Section</span>
+            <h2 class="type-display mb-12">Online streaming</h2>
+            
+            <div class="markdown-content max-w-4xl">
+                
+<h2>General architecture</h2>
+<p><img alt="general architecture" src="References/digital_video_introduction/i/general_architecture.png" title="general architecture" /></p>
+<p>[TODO]</p>
+<h2>Progressive download and adaptive streaming</h2>
+<p><img alt="progressive download" src="References/digital_video_introduction/i/progressive_download.png" title="progressive download" /></p>
+<p><img alt="adaptive streaming" src="References/digital_video_introduction/i/adaptive_streaming.png" title="adaptive streaming" /></p>
+<p>[TODO]</p>
+<h2>Content protection</h2>
+<p>We can use <strong>a simple token system</strong> to protect the content. The user without a token tries to request a video and the CDN forbids her or him while a user with a valid token can play the content, it works pretty similarly to most of the web authentication systems.</p>
+<p><img alt="token protection" src="References/digital_video_introduction/i/token_protection.png" title="token_protection" /></p>
+<p>The sole use of this token system still allows a user to download a video and distribute it. Then the <strong>DRM (digital rights management)</strong> systems can be used to try to avoid this.</p>
+<p><img alt="drm" src="References/digital_video_introduction/i/drm.png" title="drm" /></p>
+<p>In real life production systems, people often use both techniques to provide authorization and authentication.</p>
+<h3>DRM</h3>
+<h4>Main systems</h4>
+<ul>
+<li>FPS - <a href="https://developer.apple.com/streaming/fps/"><strong>FairPlay Streaming</strong></a></li>
+<li>PR - <a href="https://www.microsoft.com/playready/"><strong>PlayReady</strong></a></li>
+<li>WV - <a href="http://www.widevine.com/"><strong>Widevine</strong></a></li>
+</ul>
+<h4>What?</h4>
+<p>DRM means <a href="https://sander.saares.eu/categories/drm-is-not-a-black-box/">Digital rights management</a>, it's a way <strong>to provide copyright protection for digital media</strong>, for instance, digital video and audio. Although it's used in many places <a href="https://en.wikipedia.org/wiki/Digital_rights_management#DRM-free_works">it's not universally accepted</a>.</p>
+<h4>Why?</h4>
+<p>Content creator (mostly studios) want to protect its intelectual property against copy to prevent unauthorized redistribution of digital media.</p>
+<h4>How?</h4>
+<p>We're going to describe an abstract and generic form of DRM in a very simplified way.</p>
+<p>Given a <strong>content C1</strong> (i.e. an hls or dash video streaming), with a <strong>player P1</strong> (i.e. shaka-clappr, exo-player or ios) in a <strong>device D1</strong> (i.e. a smartphone, TV, tablet or desktop/notebook) using a <strong>DRM system DRM1</strong> (widevine, playready or FairPlay).</p>
+<p>The content C1 is encrypted with a <strong>symmetric-key K1</strong> from the system DRM1, generating the <strong>encrypted content C'1</strong>.</p>
+<p><img alt="drm general flow" src="References/digital_video_introduction/i/drm_general_flow.jpeg" title="drm general flow" /></p>
+<p>The player P1, of a device D1, has two keys (asymmetric), a <strong>private key PRK1</strong> (this key is protected<sup>1</sup> and only known by <strong>D1</strong>) and a <strong>public key PUK1</strong>.</p>
+<blockquote>
+<p><strong><sup>1</sup>protected</strong>: this protection can be <strong>via hardware</strong>, for instance, this key can be stored inside a special (read-only) chip that works like <a href="https://en.wikipedia.org/wiki/Black_box">a black-box</a> to provide decryption, or <strong>by software</strong> (less safe), the DRM system provides means to know which type of protection a given device has.</p>
+</blockquote>
+<p>When the <strong>player P1 wants to play</strong> the <strong>content C'1</strong>, it needs to deal with the <strong>DRM system DRM1</strong>, giving its public key <strong>PUK1</strong>. The DRM system DRM1 returns the <strong>key K1 encrypted</strong> with the client''s public key <strong>PUK1</strong>. In theory, this response is something that <strong>only D1 is capable of decrypting</strong>.</p>
+<p><code>K1P1D1 = enc(K1, PUK1)</code></p>
+<p><strong>P1</strong> uses its DRM local system (it could be a <a href="https://en.wikipedia.org/wiki/System_on_a_chip">SOC</a>, a specialized hardware or software), this system is <strong>able to decrypt</strong> the content using its private key PRK1, it can decrypt <strong>the symmetric-key K1 from the K1P1D1</strong> and <strong>play C'1</strong>. At best case, the keys are not exposed through RAM.</p>
+<p>```
+ K1 = dec(K1P1D1, PRK1)</p>
+<p>P1.play(dec(C'1, K1))
+ ```</p>
+<p><img alt="drm decoder flow" src="References/digital_video_introduction/i/drm_decoder_flow.jpeg" title="drm decoder flow" /></p>
+
+            </div>
+        </div>
+    </section>
+    
+    <section id="how-to-use-jupyter" class="py-24 bg-white swiss-border-b">
+        <div class="max-w-7xl mx-auto px-6 md:px-12 swiss-container fade-up">
+            <span class="type-label mb-6 block text-[var(--swiss-red)]">Section</span>
+            <h2 class="type-display mb-12">How to use jupyter</h2>
+            
+            <div class="markdown-content max-w-4xl">
+                
+<p>Make sure you have <strong>docker installed</strong> and just run <code>./s/start_jupyter.sh</code> and follow the instructions on the terminal.</p>
+
+            </div>
+        </div>
+    </section>
+    
+    <section id="conferences" class="py-24 bg-white swiss-border-b">
+        <div class="max-w-7xl mx-auto px-6 md:px-12 swiss-container fade-up">
+            <span class="type-label mb-6 block text-[var(--swiss-red)]">Section</span>
+            <h2 class="type-display mb-12">Conferences</h2>
+            
+            <div class="markdown-content max-w-4xl">
+                
+<ul>
+<li><a href="https://demuxed.com/">DEMUXED</a> - you can <a href="https://www.youtube.com/channel/UCIc_DkRxo9UgUSTvWVNCmpA">check the last 2 events presentations.</a>.</li>
+</ul>
+
+            </div>
+        </div>
+    </section>
+    
+    <section id="references" class="py-24 bg-white swiss-border-b">
+        <div class="max-w-7xl mx-auto px-6 md:px-12 swiss-container fade-up">
+            <span class="type-label mb-6 block text-[var(--swiss-red)]">Section</span>
+            <h2 class="type-display mb-12">References</h2>
+            
+            <div class="markdown-content max-w-4xl">
+                
+<p>The richest content is here, it's where all the info we saw in this text was extracted, based or inspired by. You can deepen your knowledge with these amazing links, books, videos and etc.</p>
+<p>Online Courses and Tutorials:</p>
+<ul>
+<li>https://www.coursera.org/learn/digital/</li>
+<li>https://people.xiph.org/~tterribe/pubs/lca2012/auckland/intro_to_video1.pdf</li>
+<li>https://xiph.org/video/vid1.shtml</li>
+<li>https://xiph.org/video/vid2.shtml</li>
+<li>https://wiki.multimedia.cx</li>
+<li>https://mahanstreamer.net</li>
+<li>http://slhck.info/ffmpeg-encoding-course</li>
+<li>http://www.cambridgeincolour.com/tutorials/camera-sensors.htm</li>
+<li>http://www.slideshare.net/vcodex/a-short-history-of-video-coding</li>
+<li>http://www.slideshare.net/vcodex/introduction-to-video-compression-13394338</li>
+<li>https://developer.android.com/guide/topics/media/media-formats.html</li>
+<li>http://www.slideshare.net/MadhawaKasun/audio-compression-23398426</li>
+<li>http://inst.eecs.berkeley.edu/~ee290t/sp04/lectures/02-Motion_Compensation_girod.pdf</li>
+</ul>
+<p>Books:</p>
+<ul>
+<li>https://www.amazon.com/Understanding-Compression-Data-Modern-Developers/dp/1491961538/ref=sr_1_1?s=books&amp;ie=UTF8&amp;qid=1486395327&amp;sr=1-1</li>
+<li>https://www.amazon.com/H-264-Advanced-Video-Compression-Standard/dp/0470516925</li>
+<li>https://www.amazon.com/High-Efficiency-Video-Coding-HEVC/dp/3319068946</li>
+<li>https://www.amazon.com/Practical-Guide-Video-Audio-Compression/dp/0240806301/ref=sr_1_3?s=books&amp;ie=UTF8&amp;qid=1486396914&amp;sr=1-3&amp;keywords=A+PRACTICAL+GUIDE+TO+VIDEO+AUDIO</li>
+<li>https://www.amazon.com/Video-Encoding-Numbers-Eliminate-Guesswork/dp/0998453005/ref=sr_1_1?s=books&amp;ie=UTF8&amp;qid=1486396940&amp;sr=1-1&amp;keywords=jan+ozer</li>
+</ul>
+<p>Onboarding material:</p>
+<ul>
+<li>https://github.com/Eyevinn/streaming-onboarding</li>
+<li>https://howvideo.works/</li>
+<li>https://www.aws.training/Details/eLearning?id=17775</li>
+<li>https://www.aws.training/Details/eLearning?id=17887</li>
+<li>https://www.aws.training/Details/Video?id=24750</li>
+</ul>
+<p>Bitstream Specifications:</p>
+<ul>
+<li>http://www.itu.int/rec/T-REC-H.264-201610-I</li>
+<li>http://www.itu.int/ITU-T/recommendations/rec.aspx?rec=12904&amp;lang=en</li>
+<li>https://storage.googleapis.com/downloads.webmproject.org/docs/vp9/vp9-bitstream-specification-v0.6-20160331-draft.pdf</li>
+<li>http://iphome.hhi.de/wiegand/assets/pdfs/2012_12_IEEE-HEVC-Overview.pdf</li>
+<li>http://phenix.int-evry.fr/jct/doc_end_user/current_document.php?id=7243</li>
+<li>http://gentlelogic.blogspot.com.br/2011/11/exploring-h264-part-2-h264-bitstream.html</li>
+<li>https://forum.doom9.org/showthread.php?t=167081</li>
+<li>https://forum.doom9.org/showthread.php?t=168947</li>
+</ul>
+<p>Software:</p>
+<ul>
+<li>https://ffmpeg.org/</li>
+<li>https://ffmpeg.org/ffmpeg-all.html</li>
+<li>https://ffmpeg.org/ffprobe.html</li>
+<li>https://mediaarea.net/en/MediaInfo</li>
+<li>https://www.jongbel.com/</li>
+<li>https://trac.ffmpeg.org/wiki/</li>
+<li>https://software.intel.com/en-us/intel-video-pro-analyzer</li>
+<li>https://medium.com/@mbebenita/av1-bitstream-analyzer-d25f1c27072b#.d5a89oxz8</li>
+</ul>
+<p>Non-ITU Codecs:</p>
+<ul>
+<li>https://aomedia.googlesource.com/</li>
+<li>https://github.com/webmproject/libvpx/tree/master/vp9</li>
+<li>https://ghostarchive.org/archive/0W0d8 (was: https://people.xiph.org/~xiphmont/demo/daala/demo1.shtml)</li>
+<li>https://people.xiph.org/~jm/daala/revisiting/</li>
+<li>https://www.youtube.com/watch?v=lzPaldsmJbk</li>
+<li>https://fosdem.org/2017/schedule/event/om_av1/</li>
+<li>https://jmvalin.ca/papers/AV1_tools.pdf</li>
+</ul>
+<p>Encoding Concepts:</p>
+<ul>
+<li>http://x265.org/hevc-h265/</li>
+<li>http://slhck.info/video/2017/03/01/rate-control.html</li>
+<li>http://slhck.info/video/2017/02/24/vbr-settings.html</li>
+<li>http://slhck.info/video/2017/02/24/crf-guide.html</li>
+<li>https://arxiv.org/pdf/1702.00817v1.pdf</li>
+<li>https://trac.ffmpeg.org/wiki/Debug/MacroblocksAndMotionVectors</li>
+<li>http://web.ece.ucdavis.edu/cerl/ReliableJPEG/Cung/jpeg.html</li>
+<li>http://www.adobe.com/devnet/adobe-media-server/articles/h264_encoding.html</li>
+<li>https://prezi.com/8m7thtvl4ywr/mp3-and-aac-explained/</li>
+<li>https://blogs.gnome.org/rbultje/2016/12/13/overview-of-the-vp9-video-codec/</li>
+<li>https://videoblerg.wordpress.com/2017/11/10/ffmpeg-and-how-to-use-it-wrong/</li>
+</ul>
+<p>Video Sequences for Testing:</p>
+<ul>
+<li>http://bbb3d.renderfarming.net/download.html</li>
+<li>https://www.its.bldrdoc.gov/vqeg/video-datasets-and-organizations.aspx</li>
+</ul>
+<p>Miscellaneous:</p>
+<ul>
+<li>https://github.com/Eyevinn/streaming-onboarding</li>
+<li>http://stackoverflow.com/a/24890903</li>
+<li>http://stackoverflow.com/questions/38094302/how-to-understand-header-of-h264</li>
+<li>http://techblog.netflix.com/2016/08/a-large-scale-comparison-of-x264-x265.html</li>
+<li>http://vanseodesign.com/web-design/color-luminance/</li>
+<li>http://www.biologymad.com/nervoussystem/eyenotes.htm</li>
+<li>http://www.compression.ru/video/codec_comparison/h264_2012/mpeg4_avc_h264_video_codecs_comparison.pdf</li>
+<li>https://web.archive.org/web/20100728070421/http://www.csc.villanova.edu/~rschumey/csc4800/dct.html (was: http://www.csc.villanova.edu/~rschumey/csc4800/dct.html)</li>
+<li>http://www.explainthatstuff.com/digitalcameras.html</li>
+<li>http://www.hkvstar.com</li>
+<li>http://www.hometheatersound.com/</li>
+<li>http://www.lighterra.com/papers/videoencodingh264/</li>
+<li>http://www.red.com/learn/red-101/video-chroma-subsampling</li>
+<li>http://www.slideshare.net/ManoharKuse/hevc-intra-coding</li>
+<li>http://www.slideshare.net/mwalendo/h264vs-hevc</li>
+<li>http://www.slideshare.net/rvarun7777/final-seminar-46117193</li>
+<li>http://www.springer.com/cda/content/document/cda_downloaddocument/9783642147029-c1.pdf</li>
+<li>http://www.streamingmedia.com/Articles/Editorial/Featured-Articles/A-Progress-Report-The-Alliance-for-Open-Media-and-the-AV1-Codec-110383.aspx</li>
+<li>http://www.streamingmediaglobal.com/Articles/ReadArticle.aspx?ArticleID=116505&amp;PageNum=1</li>
+<li>http://yumichan.net/video-processing/video-compression/introduction-to-h264-nal-unit/</li>
+<li>https://cardinalpeak.com/blog/the-h-264-sequence-parameter-set/</li>
+<li>https://cardinalpeak.com/blog/worlds-smallest-h-264-encoder/</li>
+<li>https://codesequoia.wordpress.com/category/video/</li>
+<li>https://developer.apple.com/library/content/technotes/tn2224/_index.html</li>
+<li>https://en.wikibooks.org/wiki/MeGUI/x264_Settings</li>
+<li>https://en.wikipedia.org/wiki/Adaptive_bitrate_streaming</li>
+<li>https://en.wikipedia.org/wiki/AOMedia_Video_1</li>
+<li>https://en.wikipedia.org/wiki/Chroma_subsampling#/media/File:Colorcomp.jpg</li>
+<li>https://en.wikipedia.org/wiki/Cone_cell</li>
+<li>https://en.wikipedia.org/wiki/File:H.264_block_diagram_with_quality_score.jpg</li>
+<li>https://en.wikipedia.org/wiki/Inter_frame</li>
+<li>https://en.wikipedia.org/wiki/Intra-frame_coding</li>
+<li>https://en.wikipedia.org/wiki/Photoreceptor_cell</li>
+<li>https://en.wikipedia.org/wiki/Pixel_aspect_ratio</li>
+<li>https://en.wikipedia.org/wiki/Presentation_timestamp</li>
+<li>https://en.wikipedia.org/wiki/Rod_cell</li>
+<li>https://it.wikipedia.org/wiki/File:Pixel_geometry_01_Pengo.jpg</li>
+<li>https://leandromoreira.com.br/2016/10/09/how-to-measure-video-quality-perception/</li>
+<li>https://sites.google.com/site/linuxencoding/x264-ffmpeg-mapping</li>
+<li>https://softwaredevelopmentperestroika.wordpress.com/2014/02/11/image-processing-with-python-numpy-scipy-image-convolution/</li>
+<li>https://tools.ietf.org/html/draft-fuldseth-netvc-thor-03</li>
+<li>https://www.encoding.com/android/</li>
+<li>https://www.encoding.com/http-live-streaming-hls/</li>
+<li>https://web.archive.org/web/20150129171151/https://www.iem.thm.de/telekom-labor/zinke/mk/mpeg2beg/whatisit.htm</li>
+<li>https://www.lifewire.com/cmos-image-sensor-493271</li>
+<li>https://www.linkedin.com/pulse/brief-history-video-codecs-yoav-nativ</li>
+<li>https://www.linkedin.com/pulse/video-streaming-methodology-reema-majumdar</li>
+<li>https://www.vcodex.com/h264avc-intra-precition/</li>
+<li>https://www.youtube.com/watch?v=9vgtJJ2wwMA</li>
+<li>https://www.youtube.com/watch?v=LFXN9PiOGtY</li>
+<li>https://www.youtube.com/watch?v=Lto-ajuqW3w&amp;list=PLzH6n4zXuckpKAj1_88VS-8Z6yn9zX_P6</li>
+<li>https://www.youtube.com/watch?v=LWxu4rkZBLw</li>
+<li>https://web.stanford.edu/class/ee398a/handouts/lectures/EE398a_MotionEstimation_2012.pdf</li>
+<li>https://sander.saares.eu/categories/drm-is-not-a-black-box/</li>
+</ul>
+            </div>
+        </div>
+    </section>
+    
+    <footer class="bg-white py-12 border-t border-gray-200">
+        <div class="max-w-7xl mx-auto px-6 swiss-container flex flex-col md:flex-row justify-between items-start md:items-center">
+            <div>
+                <span class="font-bold tracking-tight">DIGITAL VIDEO INTRO</span>
+                <p class="text-xs text-gray-500 mt-2 max-w-xs">
+                    Ported from leandromoreira/digital_video_introduction
+                </p>
+            </div>
+            <div class="flex gap-8 mt-8 md:mt-0">
+                <a href="https://github.com/leandromoreira/digital_video_introduction" class="type-label hover:text-[var(--swiss-red)]">Original Repo</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>
